@@ -3,51 +3,59 @@ using System.Xml.Linq;
 
 namespace Barber.Domain.Entity
 {
-    public class Professonals : Entity
+    public class Professional : Entity
     {
 
-        public Professonals(
+        public Professional(
             Guid userId,
             string professonalName,
-            AvailabilityStatus stats,
-            ICollection<Services>? services
+            EAvailabilityStatus stats,
+            ICollection<Service>? services
             )
         {
             ProfessonalId = userId;
             ProfessonalName = professonalName;
-            Stats = stats;
+            Status = stats;
             Services = services;
+
+
 
         }
 
         public Guid ProfessonalId { get; private set; }
         public string ProfessonalName { get; private set; } = string.Empty;
-        public AvailabilityStatus Stats { get; private set; }
-        public ICollection<Services>? Services { get; set; }
-        public ICollection<Scheduling>? Schedulings { get; set; }
+        public EAvailabilityStatus Status { get; private set; }
+        public ICollection<Service> Services { get; private set; } = new List<Service>();
+        public ICollection<Scheduling> Schedulings { get; private set; } = new List<Scheduling>();
 
-        public void UpdateProfessonal(
-            Guid? professonalId = null,
-            string? professonalName = null,
-            AvailabilityStatus? stats = null,
-            ICollection<Services>? services = null,
-            ICollection<Scheduling>? schedulings = null
-            )
+        public void UpdateProfessonalName(  string name ) => ProfessonalName = name;
+        public void UpdateStatus( EAvailabilityStatus status ) => Status = status;
+
+        public void AddService(Service service)
         {
-            if (professonalId.HasValue)
-                ProfessonalId = professonalId.Value;
+            if (service == null)
+                throw new ArgumentNullException(nameof(service));
+            Services.Add(service);
+        }
+        public void RemoveService(Service service)
+        {
+            if (service == null)
+                throw new ArgumentNullException(nameof(service));
+            Services.Remove(service);
+        }
 
-            if (!string.IsNullOrEmpty(professonalName))
-                ProfessonalName = professonalName;
 
-            if (stats.HasValue)
-                Stats = stats.Value;
-
-            if (services != null)
-                Services = services;
-
-            if (schedulings != null)
-                Schedulings = schedulings;
+        public void AddScheduling(Scheduling scheduling)
+        {
+            if (scheduling == null)
+                throw new ArgumentNullException(nameof(scheduling));
+            Schedulings.Add(scheduling);
+        }
+        public void RemoveService(Scheduling scheduling)
+        {
+            if(scheduling == null)
+                throw new ArgumentNullException(nameof(scheduling));
+            Schedulings.Remove(scheduling);
         }
 
     }

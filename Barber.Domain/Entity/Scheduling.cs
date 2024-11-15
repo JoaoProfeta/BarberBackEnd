@@ -8,56 +8,36 @@ namespace Barber.Domain.Entity
         public Scheduling(
             DateTime schedulingTime, 
             Guid professionalId,
-            SchedulingStatus status,
-            ICollection<Services> servicesSelected
+            ESchedulingStatus status,
+            ICollection<Service> servicesSelected
             )
         {
             SchedulingTime = schedulingTime;
             ProfessionalSelectedId = professionalId;
             SchedulingStatus = status;
-            ServicesSelected = servicesSelected;
+            Services = servicesSelected;
         }
         
         public DateTime SchedulingTime { get; private set; }
         public Guid ProfessionalSelectedId { get; private set; }
-        public SchedulingStatus SchedulingStatus { get; private set; }
-        public ICollection<Services> ServicesSelected { get; private set; }
+        public ESchedulingStatus SchedulingStatus { get; private set; }
+        public ICollection<Service> Services { get; private set; } = new List<Service>();
 
+        public void UpdateDate( DateTime date ) => SchedulingTime = date;
+        public void UpdateProfessonalSelected(Guid professionalId) => ProfessionalSelectedId = professionalId;
+        public void UpdateSchedulingStatus( ESchedulingStatus status ) => SchedulingStatus = status;
 
-
-        public void UpdateScheduling(
-            DateTime schedulingTime,
-            Guid professionalId,
-            SchedulingStatus status,
-            ICollection<Services> servicesSelected
-            ) 
+        public void AddService(Service service)
         {
-
-            SchedulingTime = schedulingTime;
-            ProfessionalSelectedId = professionalId;
-            SchedulingStatus = status;
-            ServicesSelected = servicesSelected;
-
+            if (service == null)
+                throw new ArgumentNullException(nameof(service));
+            Services.Add(service);
         }
-
-        public void Update(
-            DateTime? schedulingTime = null,
-            Guid? professionalSelectedId = null,
-            SchedulingStatus? status = null,
-            ICollection<Services>? servicesSelected = null
-            )
+        public void RemoveService(Service service)
         {
-            if (schedulingTime.HasValue)
-                SchedulingTime = schedulingTime.Value;
-
-            if (professionalSelectedId.HasValue)
-                ProfessionalSelectedId = professionalSelectedId.Value;
-
-            if (status.HasValue)
-                SchedulingStatus = status.Value;
-
-            if (servicesSelected != null)
-                ServicesSelected = servicesSelected;
+            if (service == null)
+                throw new ArgumentNullException(nameof(service));
+            Services.Remove(service);
         }
     }
 }

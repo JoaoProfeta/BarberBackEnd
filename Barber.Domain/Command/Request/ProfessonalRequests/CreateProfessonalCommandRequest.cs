@@ -1,26 +1,30 @@
 using Barber.Domain.Command.Contracts;
 using Barber.Domain.Entity;
 using Barber.Domain.Enum;
-
-namespace Barber.Domain.Command.Request.ProfessonalRequests;
-
-public class CreateProfessonalCommandRequest : ICommand
+using Flunt.Notifications;
+using Flunt.Validations;
+namespace Barber.Domain.Command.Request.ProfessonalRequests
 {
-    public CreateProfessonalCommandRequest(
-        Guid professonalId,
-        string professonalName,
-        AvailabilityStatus stats,
-        ICollection<Services>? services
-        )
+    public sealed record CreateProfessonalCommandRequest(
+            Guid ProfessonalId,
+            string ProfessonalName,
+            EAvailabilityStatus Status,
+            ICollection<Service> Services) : ICommand
     {
-        ProfessonalId = professonalId;
-        ProfessonalName = professonalName;
-        Stats = stats;
-        Services = services;
-    }
+        public List<Notification> Notifications { get; private set; } = new();
+        public bool IsValid => Notifications.Count  == 0;
 
-    public Guid ProfessonalId { get; private set; }
-    public string ProfessonalName { get; private set; } = string.Empty;
-    public AvailabilityStatus Stats { get; private set; }
-    public ICollection<Services>? Services { get; private set; }
+        public void Validate()
+        {
+            var contract = new Contract<Notification>()
+                .Requires()
+                .IsGreaterThan( ProfessonalName.Length, 3, "Nome", "O nome deve conter no minimo 3 letras" )
+                .IsNotNullOrEmpty( ProfessonalName, "Nome", "O nome não pode ser vazio" )
+                .IsGreaterThan( Services.Count, 1, "Serviços", "Adicione pelomenos 1 serviço" )
+                .IsNotNull( Services, "Serviços", "Adicione serviços" );
+
+            Notifications.AddRange(contract.Notifications);
+
+        }
+    }
 }

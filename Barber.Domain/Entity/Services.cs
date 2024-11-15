@@ -2,11 +2,11 @@
 
 namespace Barber.Domain.Entity
 {
-    public class Services : Entity
+    public class Service : Entity
     {
-        public Services(
+        public Service(
             string name,
-            AvailabilityStatus status
+            EAvailabilityStatus status
             )
         {
             Name = name;
@@ -14,22 +14,11 @@ namespace Barber.Domain.Entity
         }
 
         public string Name { get; private set; } = string.Empty;
-        public AvailabilityStatus ServiceStatus { get; private set; }
-        public ICollection<Professonals>? Professonals { get; set; }
-        
+        public EAvailabilityStatus ServiceStatus { get; private set; }
+        public ICollection<Professional>? Professionals { get; set; }
 
-        public void UpdateService(
-            string? name = null,
-            AvailabilityStatus? stats = null)
-        {
-
-            if (stats.HasValue)
-                ServiceStatus = stats.Value;
-
-            if (!string.IsNullOrEmpty(name)) 
-                Name = name;
-
-
-        }
+        public void UpdateName(string name) => Name = name;
+        public void UpdateStatus(EAvailabilityStatus status) => ServiceStatus = status;
+                    
     }
 }

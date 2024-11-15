@@ -24,7 +24,7 @@ namespace Barber.Domain.Queries
         }
         public static Expression<Func<Scheduling, bool>> GetAllSchedulingByServicecId(Guid serviceId)
         {
-            return x => x.ServicesSelected.Any(s => s.Id == serviceId);
+            return x => x.Services.Any(s => s.Id == serviceId);
         }
     }
 }

@@ -1,31 +1,30 @@
 using Barber.Domain.Command.Contracts;
 using Barber.Domain.Entity;
 using Barber.Domain.Enum;
+using Flunt.Notifications;
+using Flunt.Validations;
 
 
 namespace Barber.Domain.Command.Request.SchedulingRequests;
 
-public class CreateSchedulingCommandRequest : ICommand
+public sealed record CreateSchedulingCommandRequest(
+        DateTime SchedulingTime,
+        Guid ProfessionalSelectedId,
+        ESchedulingStatus SchedulingStatus,
+        ICollection<Service> ServicesSelected) : ICommand
 {
-    public CreateSchedulingCommandRequest() { }
+    public List<Notification> Notifications { get; private set; } = new();
+    public bool IsValid => Notifications.Count == 0;
 
-    public CreateSchedulingCommandRequest(
-        DateTime schedulingTime,
-        Guid professionalSelectedId,
-        SchedulingStatus schedulingStatus,
-        ICollection<Services> servicesSelected
-        )
+    public void Validate()
     {
-        SchedulingTime = schedulingTime;
-        ProfessionalSelectedId = professionalSelectedId;
-        SchedulingStatus = schedulingStatus;
-        ServicesSelected = servicesSelected;
+        var contract = new Contract<Notification>()
+            .Requires()
+            .IsNotNull(SchedulingTime, "Agendar", "adicione um horario para agendar")
+            .IsNotNull(ProfessionalSelectedId, "Profissional", "Adicione um profissional")
+            .IsGreaterOrEqualsThan(ServicesSelected, 1, "Adicione pelomenos 1 serviço");
+        Notifications.AddRange(contract.Notifications);
     }
-
-    public DateTime SchedulingTime { get; private set; }
-    public Guid ProfessionalSelectedId { get; private set; }
-    public SchedulingStatus SchedulingStatus { get; private set; }
-    public ICollection<Services> ServicesSelected { get; private set; }
 
 
 }

@@ -25,6 +25,9 @@ public class SchedulingHandler :
     {
         try
         {
+            command.Validate();
+            if (!command.IsValid)
+                return new GenericCommandResult(false, "falha ao criar Agendamento");
 
             var scheduling = new Scheduling(
                command.SchedulingTime,
@@ -44,7 +47,7 @@ public class SchedulingHandler :
                     scheduling.SchedulingTime,
                     scheduling.ProfessionalSelectedId,
                     scheduling.SchedulingStatus,
-                    scheduling.ServicesSelected
+                    scheduling.Services
 
                 }
              );
@@ -61,7 +64,8 @@ public class SchedulingHandler :
     {
         try
         {
-            if(command.Id.ToString().Length <= 0)
+            command.Validate();
+            if(!command.IsValid)
                 return new GenericCommandResult(false, "Erro ao identificar agendamento");
 
             var scheduling = await _schedulingRepository.GetByIdAsync(command.Id);
@@ -69,12 +73,14 @@ public class SchedulingHandler :
             if (scheduling == null)
                 return new GenericCommandResult(false, "Scheduling not found");
 
-            scheduling.Update(
-               command.SchedulingTime,
-               command.ProfessionalSelectedId,
-               command.SchedulingStatus,
-               command.ServicesSelected
-                );
+            if( command.SchedulingTime != null && !command.SchedulingTime.Equals(scheduling.SchedulingTime) )
+                scheduling.UpdateDate(command.SchedulingTime);
+
+            if( command.Status != scheduling.SchedulingStatus)
+                scheduling.UpdateSchedulingStatus(command.Status);
+
+            if( command.ProfessionalSelectedId != scheduling.ProfessionalSelectedId)
+                scheduling.UpdateProfessonalSelected(command.ProfessionalSelectedId);
 
             await _schedulingRepository.UpdateAsync(scheduling);
 
@@ -87,7 +93,7 @@ public class SchedulingHandler :
                     scheduling.SchedulingTime,
                     scheduling.ProfessionalSelectedId,
                     scheduling.SchedulingStatus,
-                    scheduling.ServicesSelected
+                    scheduling.Services
                 });
 
         }
@@ -103,7 +109,8 @@ public class SchedulingHandler :
     {
         try
         {
-            if (command.Id.ToString().Length <= 0)
+            command.Validate();
+            if(!command.IsValid)
                 return new GenericCommandResult(false, "Identificador unico errado");
 
             var scheduling = await _schedulingRepository.GetByIdAsync(command.Id);

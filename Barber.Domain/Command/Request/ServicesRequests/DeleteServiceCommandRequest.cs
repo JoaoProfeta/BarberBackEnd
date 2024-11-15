@@ -1,15 +1,20 @@
 ﻿using Barber.Domain.Command.Contracts;
+using Barber.Domain.Entity;
+using Flunt.Notifications;
+using Flunt.Validations;
 
 namespace Barber.Domain.Command.Request.ServicesRequests
 {
-    public class DeleteServiceCommandRequest : ICommand
+    public sealed record DeleteServiceCommandRequest(Guid Id) : ICommand
     {
-        public DeleteServiceCommandRequest() { }
-        public DeleteServiceCommandRequest(Guid id)
+        public List<Notification> Notifications { get; private set; } = new();
+        public bool IsValid => Notifications.Count == 0;
+        public void Validate()
         {
-            Id = id;
+            var contract = new Contract<Notification>()
+                .Requires()
+                .IsNotNull(Id, "Id", "Selecione o Profissional");
+            Notifications.AddRange(contract.Notifications);
         }
-
-        public Guid Id { get; private set; }
     }
 }

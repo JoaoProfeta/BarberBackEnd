@@ -1,4 +1,7 @@
 ﻿using Barber.Domain.Command.Contracts;
+using Barber.Domain.Entity;
+using Flunt.Notifications;
+using Flunt.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +10,17 @@ using System.Threading.Tasks;
 
 namespace Barber.Domain.Command.Request.ProfessonalRequests
 {
-    public class DeleteProfessonalCommandRequest : ICommand
+    public sealed record DeleteProfessonalCommandRequest(Guid Id) : ICommand
     {
-        public DeleteProfessonalCommandRequest(Guid id)
+        public List<Notification> Notifications { get; private set; } = new();
+        public bool IsValid => Notifications.Count == 0;
+        public void Validate()
         {
-            Id = id;
-        }
 
-        public Guid Id { get; private set; }
+            var contract = new Contract<Notification>()
+                .Requires()
+                .IsNotNull(Id, "Id", "Selecione o Profissional");
+            Notifications.AddRange(contract.Notifications);
+        }
     }
 }

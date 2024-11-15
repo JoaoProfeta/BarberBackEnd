@@ -1,6 +1,6 @@
 ﻿namespace Barber.Domain.Enum
 {
-    public enum SchedulingStatus
+    public enum ESchedulingStatus
     {
         Accepted = 1,
         Rejected = 2,

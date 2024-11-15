@@ -6,30 +6,29 @@ using System.Threading.Tasks;
 using Barber.Domain.Command.Contracts;
 using Barber.Domain.Entity;
 using Barber.Domain.Enum;
+using Flunt.Notifications;
+using Flunt.Validations;
 
 namespace Barber.Domain.Command.Request.SchedulingRequests
 {
-    public class UpdateSchedulingCommandRequest : ICommand
+    public sealed record UpdateSchedulingCommandRequest(
+        Guid Id,
+        DateTime SchedulingTime,
+        Guid ProfessionalSelectedId,
+        ESchedulingStatus Status,
+        ICollection<Service> ServicesSelected) : ICommand
     {
-        public UpdateSchedulingCommandRequest() { }
-        public UpdateSchedulingCommandRequest(
-        Guid id,
-        DateTime schedulingTime,
-        Guid professionalSelectedId,
-        SchedulingStatus schedulingStatus,
-        ICollection<Services> servicesSelected
-        )
+        public List<Notification> Notifications { get; private set; } = new();
+        public bool IsValid => Notifications.Count == 0;
+
+        public void Validate()
         {
-            Id = id;
-            SchedulingTime = schedulingTime;
-            ProfessionalSelectedId = professionalSelectedId;
-            SchedulingStatus = schedulingStatus;
-            ServicesSelected = servicesSelected;
+            var contract = new Contract<Notification>()
+                .Requires()
+                .IsNotNull(SchedulingTime, "data", "Selecione o horario de agendamento")
+                .IsNotNull(ProfessionalSelectedId, "Profissional", "Selecione o prifissional")
+                .IsGreaterOrEqualsThan(ServicesSelected, 1, "Selecione ao menos 1 serviço");
+            Notifications.AddRange(contract.Notifications);
         }
-        public Guid Id { get; private set; }
-        public DateTime SchedulingTime { get; private set; }
-        public Guid ProfessionalSelectedId { get; private set; }
-        public SchedulingStatus SchedulingStatus { get; private set; }
-        public ICollection<Services> ServicesSelected { get; private set; }
     }
 }

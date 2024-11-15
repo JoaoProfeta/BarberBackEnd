@@ -10,17 +10,17 @@ namespace Barber.Domain.Queries
 {
     public static class ServiceQueries
     {
-        public static Expression<Func<Services, bool>> GetById(Guid id)
+        public static Expression<Func<Service, bool>> GetById(Guid id)
         {
             return x => x.Id == id;
         }
-        public static Expression<Func<Services, bool>> GetAll()
+        public static Expression<Func<Service, bool>> GetAll()
         {
             return x => true;
         }
-        public static Expression<Func<Services, bool>> GetAllServicesByProfessonalId(Guid professonalId)
+        public static Expression<Func<Service, bool>> GetAllServicesByProfessonalId(Guid professonalId)
         {
-            return x => x.Professonals.Any(p => p.Id == professonalId);
+            return x => x.Professionals.Any(p => p.Id == professonalId);
         }
        
 

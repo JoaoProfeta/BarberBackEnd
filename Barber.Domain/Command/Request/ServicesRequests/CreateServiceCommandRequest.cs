@@ -1,22 +1,26 @@
 using Barber.Domain.Command.Contracts;
+using Barber.Domain.Entity;
 using Barber.Domain.Enum;
+using Flunt.Notifications;
+using Flunt.Validations;
 
 namespace Barber.Domain.Command.Request.ServicesRequests
 {
 
-    public class CreateServiceCommandRequest : ICommand
+    public sealed record CreateServiceCommandRequest(
+            string Name,
+            EAvailabilityStatus Status) : ICommand
     {
-        public CreateServiceCommandRequest() { }
-        public CreateServiceCommandRequest(
-            string name,
-            AvailabilityStatus status
-            )
-        {
-            Name = name;
-            Status = status;
-        }
+        public List<Notification> Notifications { get; private set; } = new();
+        public bool IsValid => Notifications.Count == 0;
 
-        public string Name { get; private set; }
-        public AvailabilityStatus Status { get; private set; }
+        public void Validate()
+        {
+            var contract = new Contract<Notification>()
+                .Requires()
+                .IsNotNullOrEmpty(Name, "Nome", "Adicione um Nome")
+                .IsGreaterOrEqualsThan(Name, 3, "Nome do serviço pequeno");
+            Notifications.AddRange(contract.Notifications);
+        }
     }
 }

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "C3fv88eSAy8=",
+  "dgSpecHash": "20f3fkvGlj8=",
   "success": true,
   "projectFilePath": "D:\\Projects\\barber\\BarberBackEnd\\Barber.Domain\\Barber.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\devpr\\.nuget\\packages\\flunt\\2.0.5\\flunt.2.0.5.nupkg.sha512"
+  ],
   "logs": []
 }

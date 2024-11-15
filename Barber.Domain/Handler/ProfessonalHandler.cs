@@ -4,7 +4,8 @@ using Barber.Domain.Command.Request.ProfessonalRequests;
 using Barber.Domain.Entity;
 using Barber.Domain.Handler.Contracts;
 using Barber.Domain.Repository;
-
+using Flunt.Notifications;
+using Flunt.Validations;
 namespace Barber.Domain.Handler
 {
     public class ProfessonalHandler :
@@ -23,13 +24,14 @@ namespace Barber.Domain.Handler
         {
             try
             {
-                if (command == null)
-                    return new GenericCommandResult(false, "Professional Invalido");
+                command.Validate();
+                if (!command.IsValid)
+                    return new GenericCommandResult(false, "Profissional Invalido");
 
-                var professonal = new Professonals(
+                var professonal = new Professional(
                     command.ProfessonalId,
                     command.ProfessonalName,
-                    command.Stats,
+                    command.Status,
                     command.Services
                     );
 
@@ -41,13 +43,9 @@ namespace Barber.Domain.Handler
                         professonal.Id,
                         professonal.ProfessonalId,
                         professonal.ProfessonalName,
-                        professonal.Stats,
+                        professonal.Status,
                         professonal.Services
                     });
-
-
-
-
             }
             catch (Exception ex)
             {
@@ -59,30 +57,27 @@ namespace Barber.Domain.Handler
         {
             try
             {
-                if (command.Id.ToString().Length <= 0)
+                command.Validate();
+                if (!command.IsValid)
                     return new GenericCommandResult(false, "Erro ao identificar profissional");
 
-                var professonal = await _professonalRepository.GetByIdAsync(command.Id);
+                var professional = await _professonalRepository.GetByIdAsync(command.Id);
 
-                professonal.UpdateProfessonal(
-                    command.ProfessonalId,
-                    command.ProfessonalName,
-                    command.Stats,
-                    command.Services
-                    );
+                professional.UpdateProfessonalName(command.ProfessonalName);
+                professional.UpdateStatus(command.Status);
 
-                await _professonalRepository.UpdateAsync(professonal);
+                await _professonalRepository.UpdateAsync(professional);
 
                 return new GenericCommandResult(
                     sucess: true,
                     message: "Profissional Atualizado com sucesso",
                     data: new
                     {
-                        professonal.Id,
-                        professonal.ProfessonalId,
-                        professonal.ProfessonalName,
-                        professonal.Stats,
-                        professonal.Services
+                        professional.Id,
+                        professional.ProfessonalId,
+                        professional.ProfessonalName,
+                        professional.Status,
+                        professional.Services
                     });
             }
             catch (Exception ex)
@@ -90,15 +85,14 @@ namespace Barber.Domain.Handler
 
                 return new GenericCommandResult(false, "erro ao atualizar profissional");
             }
-
-
         }
 
         public async Task<ICommandResult> Handle(DeleteProfessonalCommandRequest command)
         {
             try
             {
-                if (command.Id.ToString().Length <= 0)
+                command.Validate();
+                if(!command.IsValid)
                     return new GenericCommandResult(false, "Erro ao encontrar profissional");
                 var professonal = await _professonalRepository.GetByIdAsync(command.Id);
 

@@ -1,15 +1,13 @@
 using Barber.Domain.Command;
 using Barber.Domain.Command.Contracts;
 using Barber.Domain.Command.Request.ServicesRequests;
-using Barber.Domain.Command.Response;
 using Barber.Domain.Entity;
-using Barber.Domain.Enum;
 using Barber.Domain.Handler.Contracts;
 using Barber.Domain.Repository;
 
 namespace Barber.Domain.Handler;
 
-public class ServiceHandler : 
+public class ServiceHandler :
     IHandler<CreateServiceCommandRequest>,
     IHandler<UpdateServiceCommandRequest>,
     IHandler<DeleteServiceCommandRequest>
@@ -27,11 +25,15 @@ public class ServiceHandler :
     {
         try
         {
-            var service = new Services(command.Name, command.Status);
+            command.Validate();
+            if (!command.IsValid)
+                return new GenericCommandResult(false, "Erro ao criar serviÃ§o");
+
+            var service = new Service(command.Name, command.Status);
 
             await _serviceRepository.CreateAsync(service);
 
-            return new GenericCommandResult(true, "Serviço Criado com sucesso",
+            return new GenericCommandResult(true, "Serviï¿½o Criado com sucesso",
                 data: new
                 {
                     command.Name,
@@ -41,29 +43,33 @@ public class ServiceHandler :
         catch (Exception ex)
         {
 
-            return new GenericCommandResult(true, "Erro ao criar serviço");
+            return new GenericCommandResult(true, "Erro ao criar serviï¿½o");
         }
     }
 
     public async Task<ICommandResult> Handle(UpdateServiceCommandRequest command)
     {
+        
         try
         {
-            if(command.Id.ToString().Length <= 0)
-                return new GenericCommandResult(false, "Erro ao identificar Serviço");
-
+            command.Validate();
+            if (!command.IsValid)
+                return new GenericCommandResult(false, "Erro ao identificar Servico");
+            
             var service = await _serviceRepository.GetByIdAsync(command.Id);
 
-            if(service != null)
-                service.UpdateService(
-                    name: command.Name,
-                    stats: command.Status
-                    );
+           if(command.Name != null)
+                service.UpdateName(command.Name);
 
+            if (command.Status != service.ServiceStatus)
+                service.UpdateStatus(command.Status);
+            
+            
+                
             await _serviceRepository.UpdateAsync(service);
 
-            return new GenericCommandResult(true, "Serviço atualizado com sucesso", 
-                data : new
+            return new GenericCommandResult(true, "Serviï¿½o atualizado com sucesso",
+                data: new
                 {
                     service.Name,
                     service.ServiceStatus
@@ -72,7 +78,7 @@ public class ServiceHandler :
         catch (Exception ex)
         {
 
-            return new GenericCommandResult(false, "Erro ao Atualizar Serviço");
+            return new GenericCommandResult(false, "Erro ao Atualizar Serviï¿½o");
         }
     }
 
@@ -80,21 +86,21 @@ public class ServiceHandler :
     {
         try
         {
-            if(command.Id.ToString().Length <= 0)
-                return new GenericCommandResult(false, "Erro ao identificar Serviço");
-            
+            if (command.Id.ToString().Length <= 0)
+                return new GenericCommandResult(false, "Erro ao identificar Serviï¿½o");
+
             var service = await _serviceRepository.GetByIdAsync(command.Id);
 
             if (service != null)
                 await _serviceRepository.DeleteAsync(service);
 
-            return new GenericCommandResult(true, "Serviço deletado com sucesso");
+            return new GenericCommandResult(true, "Serviï¿½o deletado com sucesso");
 
         }
         catch (Exception ex)
         {
 
-            return new GenericCommandResult(false, "Erro ao deletar serviçi");
+            return new GenericCommandResult(false, "Erro ao deletar serviï¿½i");
         }
     }
 

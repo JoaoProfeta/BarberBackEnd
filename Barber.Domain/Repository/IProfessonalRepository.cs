@@ -4,10 +4,10 @@ namespace Barber.Domain.Repository;
 
 public interface IProfessonalRepository
 {
-    Task CreateAsync(Professonals professonals);
-    Task UpdateAsync(Professonals professonals);
-    Task DeleteAsync(Professonals professonals);
-    Task<Professonals> GetByIdAsync(Guid id);
-    Task<ICollection<Professonals>> GetAllAsync();
-    Task<ICollection<Professonals>> GetAllProfessonalByServiceIdAsync(ICollection<Guid> Id);
+    Task CreateAsync(Professional professonals);
+    Task UpdateAsync(Professional professonals);
+    Task DeleteAsync(Professional professonals);
+    Task<Professional> GetByIdAsync(Guid id);
+    Task<ICollection<Professional>> GetAllAsync();
+    Task<ICollection<Professional>> GetAllProfessonalByServiceIdAsync(ICollection<Guid> Id);
 }
