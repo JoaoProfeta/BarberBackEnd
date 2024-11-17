@@ -18,8 +18,6 @@ namespace Barber.Domain.Entity
             Status = stats;
             Services = services;
 
-
-
         }
 
         public Guid ProfessonalId { get; private set; }

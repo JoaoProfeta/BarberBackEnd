@@ -8,19 +8,19 @@ using Flunt.Notifications;
 using Flunt.Validations;
 namespace Barber.Domain.Handler
 {
-    public class ProfessonalHandler :
-        IHandler<CreateProfessonalCommandRequest>,
-        IHandler<UpdateProfessonalCommandRequest>,
-        IHandler<DeleteProfessonalCommandRequest>
+    public class ProfessionalHandler :
+        IHandler<CreateProfessionalCommandRequest>,
+        IHandler<UpdateProfessionalCommandRequest>,
+        IHandler<DeleteProfessionalCommandRequest>
     {
         private readonly IProfessonalRepository _professonalRepository;
 
-        public ProfessonalHandler(IProfessonalRepository professonalRepository)
+        public ProfessionalHandler(IProfessonalRepository professonalRepository)
         {
             _professonalRepository = professonalRepository;
         }
 
-        public async Task<ICommandResult> Handle(CreateProfessonalCommandRequest command)
+        public async Task<ICommandResult> Handle(CreateProfessionalCommandRequest command)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace Barber.Domain.Handler
             }
         }
 
-        public async Task<ICommandResult> Handle(UpdateProfessonalCommandRequest command)
+        public async Task<ICommandResult> Handle(UpdateProfessionalCommandRequest command)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace Barber.Domain.Handler
             }
         }
 
-        public async Task<ICommandResult> Handle(DeleteProfessonalCommandRequest command)
+        public async Task<ICommandResult> Handle(DeleteProfessionalCommandRequest command)
         {
             try
             {

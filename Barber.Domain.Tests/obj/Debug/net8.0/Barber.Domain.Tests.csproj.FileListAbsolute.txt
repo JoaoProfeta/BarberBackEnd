@@ -8,6 +8,7 @@ D:\Projects\barber\BarberBackEnd\Barber.Domain.Tests\bin\Debug\net8.0\Barber.Dom
 D:\Projects\barber\BarberBackEnd\Barber.Domain.Tests\bin\Debug\net8.0\Barber.Domain.Tests.runtimeconfig.json
 D:\Projects\barber\BarberBackEnd\Barber.Domain.Tests\bin\Debug\net8.0\Barber.Domain.Tests.dll
 D:\Projects\barber\BarberBackEnd\Barber.Domain.Tests\bin\Debug\net8.0\Barber.Domain.Tests.pdb
+D:\Projects\barber\BarberBackEnd\Barber.Domain.Tests\bin\Debug\net8.0\Flunt.dll
 D:\Projects\barber\BarberBackEnd\Barber.Domain.Tests\bin\Debug\net8.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
 D:\Projects\barber\BarberBackEnd\Barber.Domain.Tests\bin\Debug\net8.0\Microsoft.TestPlatform.CoreUtilities.dll
 D:\Projects\barber\BarberBackEnd\Barber.Domain.Tests\bin\Debug\net8.0\Microsoft.TestPlatform.PlatformAbstractions.dll

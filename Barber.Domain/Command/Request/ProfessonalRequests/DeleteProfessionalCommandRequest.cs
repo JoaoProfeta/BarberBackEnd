@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Barber.Domain.Command.Request.ProfessonalRequests
 {
-    public sealed record DeleteProfessonalCommandRequest(Guid Id) : ICommand
+    public sealed record DeleteProfessionalCommandRequest(Guid Id) : ICommand
     {
         public List<Notification> Notifications { get; private set; } = new();
         public bool IsValid => Notifications.Count == 0;
