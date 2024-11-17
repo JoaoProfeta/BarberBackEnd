@@ -6,7 +6,7 @@ using Flunt.Validations;
 
 namespace Barber.Domain.Command.Request.ProfessonalRequests
 {
-    public sealed record UpdateProfessonalCommandRequest(
+    public sealed record UpdateProfessionalCommandRequest(
             Guid Id,
             Guid ProfessonalId,
             string ProfessonalName,
