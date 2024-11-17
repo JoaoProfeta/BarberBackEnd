@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "TJMoLjmdTe0=",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\barber\\BarberBackEnd\\Barber.Domain.Infra\\Barber.Domain.Infra.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\devpr\\.nuget\\packages\\flunt\\2.0.5\\flunt.2.0.5.nupkg.sha512"
+  ],
+  "logs": []
+}
