@@ -46,7 +46,12 @@ namespace Barber.Domain.Tests.FakeRepository
 
         public Task UpdateAsync(Professional professionals)
         {
-            var existingProfessional = _professionals.FirstOrDefault(p => p.ProfessionalId == professionals.ProfessionalId); if (existingProfessional != null) { _professionals.Remove(existingProfessional); _professionals.Add(professionals); }
+            var existingProfessional = _professionals.FirstOrDefault(p => p.ProfessionalId == professionals.ProfessionalId); 
+            if (existingProfessional != null) 
+            { 
+                _professionals.Remove(existingProfessional); 
+                _professionals.Add(professionals);
+            }
             return Task.CompletedTask;
         }
     }

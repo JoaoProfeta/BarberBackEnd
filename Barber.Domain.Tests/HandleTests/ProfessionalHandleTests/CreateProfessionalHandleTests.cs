@@ -1,7 +1,7 @@
 ﻿using Barber.Domain.Command;
 using Barber.Domain.Command.Request.ProfessonalRequests;
 using Barber.Domain.Entity;
-using Barber.Domain.Handler;
+using Barber.Domain.Handler.ProfessionalHandle;
 using Barber.Domain.Tests.FakeRepository;
 
 namespace Barber.Domain.Tests.HandleTests.ProfessionalHandleTests
