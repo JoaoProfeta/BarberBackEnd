@@ -9,7 +9,7 @@ public interface ISchedulingRepository
     Task DeleteAsync(Scheduling scheduling);
     Task<Scheduling> GetByIdAsync(Guid id);
     Task<ICollection<Scheduling>> GetAllAsync();
-    Task<ICollection<Scheduling>> GetAllSchedulingByProfessonalId(Guid professonalId);
+    Task<ICollection<Scheduling>> GetAllSchedulingByProfessonalId(Guid professionalId);
     Task<ICollection<Service>> GetAllSchedulingByServiceIdAsync(Guid schedulingId);
 
 }

@@ -14,15 +14,15 @@ namespace Barber.Domain.Tests.CommandTests.ProfessionalTests
         
         private readonly UpdateProfessionalCommandRequest _InvalidCommand = new UpdateProfessionalCommandRequest(
             Id: Guid.NewGuid(),
-            ProfessonalId: Guid.NewGuid(),
-            ProfessonalName: "",
+            ProfessionalId: Guid.NewGuid(),
+            ProfessionalName: "",
             Status: Enum.EAvailabilityStatus.Unavailable,
             Services: new List<Service> { new Service( name: "Sobrancelha", status: Enum.EAvailabilityStatus.Avaliable) }
             );
         private readonly UpdateProfessionalCommandRequest _ValidCommand = new UpdateProfessionalCommandRequest(
             Id: Guid.NewGuid(),
-            ProfessonalId: Guid.NewGuid(),
-            ProfessonalName: "Joao Vitor",
+            ProfessionalId: Guid.NewGuid(),
+            ProfessionalName: "Joao Vitor",
             Status: Enum.EAvailabilityStatus.Unavailable,
             Services: new List<Service> { new Service(name: "sobrancelha", status: Enum.EAvailabilityStatus.Unavailable) });
 

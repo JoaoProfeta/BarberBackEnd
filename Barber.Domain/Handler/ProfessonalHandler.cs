@@ -13,9 +13,9 @@ namespace Barber.Domain.Handler
         IHandler<UpdateProfessionalCommandRequest>,
         IHandler<DeleteProfessionalCommandRequest>
     {
-        private readonly IProfessonalRepository _professonalRepository;
+        private readonly IProfessionalRepository _professonalRepository;
 
-        public ProfessionalHandler(IProfessonalRepository professonalRepository)
+        public ProfessionalHandler(IProfessionalRepository professonalRepository)
         {
             _professonalRepository = professonalRepository;
         }
@@ -29,8 +29,8 @@ namespace Barber.Domain.Handler
                     return new GenericCommandResult(false, "Profissional Invalido");
 
                 var professonal = new Professional(
-                    command.ProfessonalId,
-                    command.ProfessonalName,
+                    command.ProfessionalId,
+                    command.ProfessionalName,
                     command.Status,
                     command.Services
                     );
@@ -41,8 +41,8 @@ namespace Barber.Domain.Handler
                     data: new
                     {
                         professonal.Id,
-                        professonal.ProfessonalId,
-                        professonal.ProfessonalName,
+                        professonal.ProfessionalId,
+                        professonal.ProfessionalName,
                         professonal.Status,
                         professonal.Services
                     });
@@ -61,11 +61,11 @@ namespace Barber.Domain.Handler
                 if (!command.IsValid)
                     return new GenericCommandResult(false, "Erro ao identificar profissional");
 
-                var professional = await _professonalRepository.GetByIdAsync(command.Id);
-
-                professional.UpdateProfessonalName(command.ProfessonalName);
+                var professional = await _professonalRepository.GetByIdAsync(command.ProfessionalId);
+                
+                professional.UpdateProfessonalName(command.ProfessionalName);
                 professional.UpdateStatus(command.Status);
-
+               
                 await _professonalRepository.UpdateAsync(professional);
 
                 return new GenericCommandResult(
@@ -74,8 +74,8 @@ namespace Barber.Domain.Handler
                     data: new
                     {
                         professional.Id,
-                        professional.ProfessonalId,
-                        professional.ProfessonalName,
+                        professional.ProfessionalId,
+                        professional.ProfessionalName,
                         professional.Status,
                         professional.Services
                     });

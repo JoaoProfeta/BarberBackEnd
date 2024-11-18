@@ -9,6 +9,6 @@ public interface IServiceRepository
     Task DeleteAsync(Service service);
     Task<Service> GetByIdAsync(Guid id);
     Task<ICollection<Service>> GetAllAsync();
-    Task<ICollection<Service>> GetAllServicesByProfessonalIdAsync(Guid professonal);
+    Task<ICollection<Service>> GetAllServicesByProfessonalIdAsync(Guid professional);
     
 }
