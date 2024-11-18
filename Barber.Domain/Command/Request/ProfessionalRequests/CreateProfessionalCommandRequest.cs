@@ -6,8 +6,8 @@ using Flunt.Validations;
 namespace Barber.Domain.Command.Request.ProfessonalRequests
 {
     public sealed record CreateProfessionalCommandRequest(
-            Guid ProfessonalId,
-            string ProfessonalName,
+            Guid ProfessionalId,
+            string ProfessionalName,
             EAvailabilityStatus Status,
             ICollection<Service> Services) : ICommand
     {
@@ -18,8 +18,8 @@ namespace Barber.Domain.Command.Request.ProfessonalRequests
         {
             var contract = new Contract<Notification>()
                 .Requires()
-                .IsGreaterThan(ProfessonalName.Length, 3, "Nome", "O nome deve conter no minimo 3 letras")
-                .IsNotNullOrEmpty(ProfessonalName, "Nome", "O nome não pode ser vazio");
+                .IsGreaterThan(ProfessionalName.Length, 3, "Nome", "O nome deve conter no minimo 3 letras")
+                .IsNotNullOrEmpty(ProfessionalName, "Nome", "O nome não pode ser vazio");
 
             Notifications.AddRange(contract.Notifications);
 

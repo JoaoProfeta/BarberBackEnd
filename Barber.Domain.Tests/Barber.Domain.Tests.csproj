@@ -24,8 +24,4 @@
     <ProjectReference Include="..\Barber.Domain\Barber.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="HandleTests\" />
-  </ItemGroup>
-
 </Project>

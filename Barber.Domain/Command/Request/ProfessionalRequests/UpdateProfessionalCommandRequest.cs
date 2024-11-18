@@ -8,8 +8,8 @@ namespace Barber.Domain.Command.Request.ProfessonalRequests
 {
     public sealed record UpdateProfessionalCommandRequest(
             Guid Id,
-            Guid ProfessonalId,
-            string ProfessonalName,
+            Guid ProfessionalId,
+            string ProfessionalName,
             EAvailabilityStatus Status,
             ICollection<Service>? Services) : ICommand
     {
@@ -19,9 +19,10 @@ namespace Barber.Domain.Command.Request.ProfessonalRequests
         {
             var contract = new Contract<Notification>()
                 .Requires()
-                .IsNotNullOrEmpty(ProfessonalName, "Nome", "O nome não pode ser vazio")
-                .IsGreaterOrEqualsThan(ProfessonalName, 3, "Nome", "O nome deve conter no minimo 3 letras")
-                .IsGreaterOrEqualsThan(Services, 1, "Serviços", "Adicione pelomenos 1 serviço");
+                .IsNotNull(Id, "Id", "O nome não pode ser vazio")
+                .IsNotNull(ProfessionalId, "Professional ID", "Id do profissional Não pode estar vazio")
+                .IsGreaterOrEqualsThan(ProfessionalName, 3, "Nome deve conter no minimo 3 caracteres");
+
             Notifications.AddRange(contract.Notifications);
 
         }

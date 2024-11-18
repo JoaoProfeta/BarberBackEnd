@@ -8,18 +8,18 @@ namespace Barber.Domain.Command
 
         public GenericCommandResult(bool sucess, string message)
         {
-            Sucess = sucess;
+            Success = sucess;
             Message = message;
         }
 
         public GenericCommandResult(bool sucess, string message, object? data ) 
         {
-            Sucess = sucess;
+            Success = sucess;
             Message = message;
             Data = data;
         }
         
-        public bool Sucess { get; private set; }
+        public bool Success { get; private set; }
         public string Message { get; private set; }
         public object? Data { get; private set; }
     }

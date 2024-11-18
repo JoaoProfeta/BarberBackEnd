@@ -8,15 +8,15 @@ namespace Barber.Domain.Tests.CommandTests.ProfessionalTests
     {
 
         private readonly CreateProfessionalCommandRequest _InvalidCommand = new CreateProfessionalCommandRequest(
-               ProfessonalId: Guid.NewGuid(),
-               ProfessonalName: "",
+               ProfessionalId: Guid.NewGuid(),
+               ProfessionalName: "",
                Status: Enum.EAvailabilityStatus.Avaliable,
                Services: new List<Service> { new Service(name: "", status: Enum.EAvailabilityStatus.Avaliable) }
                 );
 
         private readonly CreateProfessionalCommandRequest _ValidCommand = new CreateProfessionalCommandRequest(
-               ProfessonalId: Guid.NewGuid(),
-               ProfessonalName: "Joao Vitor",
+               ProfessionalId: Guid.NewGuid(),
+               ProfessionalName: "Joao Vitor",
                Status: Enum.EAvailabilityStatus.Avaliable,
                Services: new List<Service>{
                    new Service(  name: "sobrancelha", status: Enum.EAvailabilityStatus.Unavailable )}
