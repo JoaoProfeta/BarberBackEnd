@@ -1,5 +1,4 @@
 ﻿using Barber.Domain.Command.Request.ProfessonalRequests;
-using Barber.Domain.Handler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +7,7 @@ using System.Threading.Tasks;
 using Barber.Domain.Tests.FakeRepository;
 using Barber.Domain.Command;
 using Barber.Domain.Entity;
+using Barber.Domain.Handler.ProfessionalHandle;
 namespace Barber.Domain.Tests.HandleTests.ProfessionalHandleTests
 {
     [TestClass]
@@ -40,7 +40,8 @@ namespace Barber.Domain.Tests.HandleTests.ProfessionalHandleTests
                 userId: _ValidCommand.ProfessionalId, 
                 professionalName: "Joao", 
                 stats: Enum.EAvailabilityStatus.Available, 
-                services: new List<Service> { new Service(name: "cabelo", status: Enum.EAvailabilityStatus.Available) } )).Wait();
+                services: new List<Service> { new Service(name: "cabelo", status: Enum.EAvailabilityStatus.Available) } 
+                )).Wait();
         }
 
 
