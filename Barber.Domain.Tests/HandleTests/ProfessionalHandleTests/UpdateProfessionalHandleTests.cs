@@ -1,13 +1,8 @@
-﻿using Barber.Domain.Command.Request.ProfessonalRequests;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Barber.Domain.Tests.FakeRepository;
-using Barber.Domain.Command;
+﻿using Barber.Domain.Command;
+using Barber.Domain.Command.Request.ProfessonalRequests;
 using Barber.Domain.Entity;
 using Barber.Domain.Handler.ProfessionalHandle;
+using Barber.Domain.Tests.FakeRepository;
 namespace Barber.Domain.Tests.HandleTests.ProfessionalHandleTests
 {
     [TestClass]
@@ -28,14 +23,13 @@ namespace Barber.Domain.Tests.HandleTests.ProfessionalHandleTests
             Services: new List<Service> { new Service(name: "sobrancelha", status: Enum.EAvailabilityStatus.Unavailable) }
             );
         private readonly FakeProfessionalRepository _repository;
-        private readonly ProfessionalHandler _handler = new ProfessionalHandler(new FakeProfessionalRepository());
+        private readonly UpdateProfessionalHandle _handler;
         private GenericCommandResult _result = new GenericCommandResult();
-
 
         public UpdateProfessionalHandleTests()
         {
             _repository = new FakeProfessionalRepository();
-            _handler = new ProfessionalHandler(_repository); // Adiciona um profissional ao repositório falso para testes
+            _handler = new UpdateProfessionalHandle(_repository); // Adiciona um profissional ao repositório falso para testes
             _repository.CreateAsync(new Professional( 
                 userId: _ValidCommand.ProfessionalId, 
                 professionalName: "Joao", 
@@ -43,7 +37,6 @@ namespace Barber.Domain.Tests.HandleTests.ProfessionalHandleTests
                 services: new List<Service> { new Service(name: "cabelo", status: Enum.EAvailabilityStatus.Available) } 
                 )).Wait();
         }
-
 
         [TestMethod]
         public async Task Update_Professional_Handle_Test_Fail()

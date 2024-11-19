@@ -23,7 +23,7 @@ namespace Barber.Domain.Tests.HandleTests.ProfessionalHandleTests
                 Services: new List<Service> { new Service(name: "sobrancelha", status: Enum.EAvailabilityStatus.Unavailable) }
                 );
 
-        private readonly ProfessionalHandler _Handler = new ProfessionalHandler(new FakeProfessionalRepository());
+        private readonly CreateProfessionalHandler _Handler = new CreateProfessionalHandler(new FakeProfessionalRepository());
         private GenericCommandResult _result = new GenericCommandResult();
 
         [TestMethod]
