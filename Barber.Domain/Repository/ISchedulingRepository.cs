@@ -11,5 +11,4 @@ public interface ISchedulingRepository
     Task<ICollection<Scheduling>> GetAllAsync();
     Task<ICollection<Scheduling>> GetAllSchedulingByProfessonalId(Guid professionalId);
     Task<ICollection<Scheduling>> GetAllSchedulingByServiceIdAsync(Guid serviceId);
-
 }

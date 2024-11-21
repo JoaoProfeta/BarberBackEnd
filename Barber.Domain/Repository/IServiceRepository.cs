@@ -10,5 +10,4 @@ public interface IServiceRepository
     Task<Service> GetByIdAsync(Guid id);
     Task<ICollection<Service>> GetAllAsync();
     Task<ICollection<Service>> GetAllServicesByProfessonalIdAsync(Guid professional);
-    
 }

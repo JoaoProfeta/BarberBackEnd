@@ -16,36 +16,30 @@ internal class FakeSchedulingRepository : ISchedulingRepository
         _scheduling.Add(scheduling);
         return Task.CompletedTask;
     }
-
     public Task DeleteAsync(Scheduling scheduling)
     {
         _scheduling.Remove(scheduling);
         return Task.CompletedTask;
     }
-
     public Task<ICollection<Scheduling>> GetAllAsync()
     {
         return Task.FromResult((ICollection<Scheduling>)_scheduling);
     }
-
     public Task<ICollection<Scheduling>> GetAllSchedulingByProfessonalId(Guid professonalId)
     {
         var result = _scheduling.Where(x => x.ProfessionalSelectedId == professonalId).ToList();
         return Task.FromResult((ICollection<Scheduling>)result);
     }
-
     public Task<ICollection<Scheduling>> GetAllSchedulingByServiceIdAsync(Guid serviceId)
     {
         var result = _scheduling.Where(x => x.Services.Any(s => s.Id == serviceId)).ToList();
         return Task.FromResult((ICollection<Scheduling>)result);
     }
-
     public Task<Scheduling> GetByIdAsync(Guid id)
     {
         var result = _scheduling.FirstOrDefault(x => x.Id == id);
         return Task.FromResult(result);
     }
-
     public Task UpdateAsync(Scheduling scheduling)
     {
         var existingProfessional = _scheduling.FirstOrDefault(p => p.Id == scheduling.Id);

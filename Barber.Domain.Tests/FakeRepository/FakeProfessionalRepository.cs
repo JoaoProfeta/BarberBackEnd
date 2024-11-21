@@ -17,33 +17,26 @@ public class FakeProfessionalRepository : IProfessionalRepository
         _professionals.Add(professionals);
         return Task.CompletedTask;
     }
-
     public Task DeleteAsync(Professional professionals)
     {
         _professionals.Remove(professionals);
         return Task.CompletedTask;
     }
-
     public Task<ICollection<Professional>> GetAllAsync()
     {
         return Task.FromResult((ICollection<Professional>)_professionals);
 
     }
-
     public Task<ICollection<Professional>> GetAllProfessonalByServiceIdAsync(ICollection<Guid> Id)
     {
         var result = _professionals.Where(p => p.Services.Any(s => Id.Contains(s.Id))).ToList();
-
         return Task.FromResult((ICollection<Professional>)result);
-
     }
-
     public Task<Professional> GetByIdAsync(Guid id)
     {
         var professional = _professionals.FirstOrDefault(p => p.ProfessionalId == id);
         return Task.FromResult(professional);
     }
-
     public Task UpdateAsync(Professional professionals)
     {
         var existingProfessional = _professionals.FirstOrDefault(p => p.ProfessionalId == professionals.ProfessionalId);

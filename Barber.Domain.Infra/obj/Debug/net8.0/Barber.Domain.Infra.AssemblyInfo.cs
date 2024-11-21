@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Barber.Domain.Infra")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b99cdb371d8f465b93d525109521cbbf7ff3c3a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dc16dd964e61708ac1be2e74c484b24764a62ce7")]
 [assembly: System.Reflection.AssemblyProductAttribute("Barber.Domain.Infra")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Barber.Domain.Infra")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

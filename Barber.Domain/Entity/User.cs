@@ -6,6 +6,5 @@ public class User : Entity
     {
         Nome = nome;
     }
-
     public string Nome { get; private set; }
 }

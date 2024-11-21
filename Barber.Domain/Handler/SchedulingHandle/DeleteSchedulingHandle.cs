@@ -3,11 +3,6 @@ using Barber.Domain.Command.Contracts;
 using Barber.Domain.Command.Request.SchedulingRequests;
 using Barber.Domain.Handler.Contracts;
 using Barber.Domain.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Barber.Domain.Handler.SchedulingHandle;
 

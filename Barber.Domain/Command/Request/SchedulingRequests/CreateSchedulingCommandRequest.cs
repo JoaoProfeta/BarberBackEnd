@@ -4,7 +4,6 @@ using Barber.Domain.Enum;
 using Flunt.Notifications;
 using Flunt.Validations;
 
-
 namespace Barber.Domain.Command.Request.SchedulingRequests;
 
 public sealed record CreateSchedulingCommandRequest(
@@ -15,14 +14,13 @@ public sealed record CreateSchedulingCommandRequest(
 {
     public List<Notification> Notifications { get; private set; } = new();
     public bool IsValid => Notifications.Count == 0;
-
     public void Validate()
     {
         var contract = new Contract<Notification>()
             .Requires()
             .IsNotNull(SchedulingTime, "Agendar", "adicione um horario para agendar")
             .IsNotNull(ProfessionalSelectedId, "Profissional", "Adicione um profissional")
-            .IsGreaterOrEqualsThan(ServicesSelected, 1, "Adicione pelomenos 1 serviço");
+            .IsGreaterOrEqualsThan(ServicesSelected, 1, "Adicione pelomenos 1 serviï¿½o");
         Notifications.AddRange(contract.Notifications);
     }
 

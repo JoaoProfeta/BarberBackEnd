@@ -1,9 +1,7 @@
-﻿namespace Barber.Domain.Enum
+﻿namespace Barber.Domain.Enum;
+public enum EAvailabilityStatus
 {
-    public enum EAvailabilityStatus
-    {
-        Avaliable = 1,
-        Unavailable = 2,
-        Available = 3
-    }
+    Avaliable = 1,
+    Unavailable = 2,
+    Available = 3
 }

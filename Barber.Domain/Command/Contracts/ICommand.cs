@@ -1,8 +1,5 @@
-namespace Barber.Domain.Command.Contracts
+namespace Barber.Domain.Command.Contracts;
+
+public interface ICommand
 {
-
-    public interface ICommand
-    {
-
-    }
 }
