@@ -9,26 +9,24 @@ using Barber.Domain.Enum;
 using Flunt.Notifications;
 using Flunt.Validations;
 
-namespace Barber.Domain.Command.Request.SchedulingRequests
+namespace Barber.Domain.Command.Request.SchedulingRequests;
+public sealed record UpdateSchedulingCommandRequest(
+    Guid Id,
+    DateTime SchedulingTime,
+    Guid ProfessionalSelectedId,
+    ESchedulingStatus Status,
+    ICollection<Service> ServicesSelected) : ICommand
 {
-    public sealed record UpdateSchedulingCommandRequest(
-        Guid Id,
-        DateTime SchedulingTime,
-        Guid ProfessionalSelectedId,
-        ESchedulingStatus Status,
-        ICollection<Service> ServicesSelected) : ICommand
+    public List<Notification> Notifications { get; private set; } = new();
+    public bool IsValid => Notifications.Count == 0;
+    public void Validate()
     {
-        public List<Notification> Notifications { get; private set; } = new();
-        public bool IsValid => Notifications.Count == 0;
+        var contract = new Contract<Notification>()
+            .Requires()
+            .IsNotNull(SchedulingTime, "data", "Selecione o horario de agendamento")
+            .IsNotNull(ProfessionalSelectedId, "Profissional", "Selecione o prifissional")
+            .IsGreaterOrEqualsThan(ServicesSelected, 1, "Selecione ao menos 1 serviço");
 
-        public void Validate()
-        {
-            var contract = new Contract<Notification>()
-                .Requires()
-                .IsNotNull(SchedulingTime, "data", "Selecione o horario de agendamento")
-                .IsNotNull(ProfessionalSelectedId, "Profissional", "Selecione o prifissional")
-                .IsGreaterOrEqualsThan(ServicesSelected, 1, "Selecione ao menos 1 serviço");
-            Notifications.AddRange(contract.Notifications);
-        }
+        Notifications.AddRange(contract.Notifications);
     }
 }

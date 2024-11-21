@@ -4,6 +4,7 @@ using Barber.Domain.Command.Request.ProfessonalRequests;
 using Barber.Domain.Entity;
 using Barber.Domain.Handler.Contracts;
 using Barber.Domain.Repository;
+
 namespace Barber.Domain.Handler.ProfessionalHandle;
 
 public class CreateProfessionalHandler : IHandler<CreateProfessionalCommandRequest>

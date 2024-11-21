@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Barber.Domain.Command;
+﻿using Barber.Domain.Command;
 using Barber.Domain.Command.Contracts;
 using Barber.Domain.Command.Request.ServicesRequests;
 using Barber.Domain.Handler.Contracts;
