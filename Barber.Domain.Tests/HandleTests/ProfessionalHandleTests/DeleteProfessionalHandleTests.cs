@@ -19,7 +19,6 @@ public class DeleteProfessionalHandleTests
     private readonly FakeProfessionalRepository _repository;
     private readonly DeleteProfessionalHandle _handler;
     private GenericCommandResult _result = new GenericCommandResult();
-
     public DeleteProfessionalHandleTests()
     {
         _repository = new FakeProfessionalRepository();

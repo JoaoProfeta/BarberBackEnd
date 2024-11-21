@@ -3,11 +3,6 @@ using Barber.Domain.Command.Request.SchedulingRequests;
 using Barber.Domain.Entity;
 using Barber.Domain.Handler.SchedulingHandle;
 using Barber.Domain.Tests.FakeRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Barber.Domain.Tests.HandleTests.SchedulingHandleTests;
 

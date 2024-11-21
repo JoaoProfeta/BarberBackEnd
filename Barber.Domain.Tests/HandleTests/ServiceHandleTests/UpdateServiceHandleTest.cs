@@ -1,14 +1,8 @@
 ﻿using Barber.Domain.Command;
-using Barber.Domain.Command.Request.ProfessonalRequests;
 using Barber.Domain.Command.Request.ServicesRequests;
 using Barber.Domain.Entity;
 using Barber.Domain.Handler.ServiceHandle;
 using Barber.Domain.Tests.FakeRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Barber.Domain.Tests.HandleTests.ServiceHandleTests;
 

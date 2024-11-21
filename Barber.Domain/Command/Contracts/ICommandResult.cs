@@ -1,6 +1,5 @@
 namespace Barber.Domain.Command.Contracts;
 
-public interface ICommandResult 
+public interface ICommandResult
 {
-    
 }

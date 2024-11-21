@@ -1,10 +1,8 @@
-﻿namespace Barber.Domain.Enum
+﻿namespace Barber.Domain.Enum;
+public enum ESchedulingStatus
 {
-    public enum ESchedulingStatus
-    {
-        Accepted = 1,
-        Rejected = 2,
-        Pending = 3,
-        
-    }
+    Accepted = 1,
+    Rejected = 2,
+    Pending = 3,
+
 }

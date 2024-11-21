@@ -28,8 +28,6 @@ public class DeleteSchedulingHandleTest
         _InvalidCommand = new DeleteSchedulingCommandRequest(Id: Guid.NewGuid());
         _ValidCommand = new DeleteSchedulingCommandRequest(Id: create.Id);
         _repository.CreateAsync(create).Wait();
-        
-
     }
 
     [TestMethod]
@@ -39,7 +37,6 @@ public class DeleteSchedulingHandleTest
         _result = (GenericCommandResult)result;
         Assert.AreEqual(_result.Success, false);
     }
-
     [TestMethod]
     public async Task Delete_Scheduling_Handle_Test_Success()
     {
