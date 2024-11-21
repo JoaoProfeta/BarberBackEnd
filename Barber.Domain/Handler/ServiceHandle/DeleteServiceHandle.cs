@@ -22,13 +22,16 @@ public class DeleteServiceHandle : IHandler<DeleteServiceCommandRequest>
     {
         try
         {
-            if (command.Id.ToString().Length <= 0)
-                return new GenericCommandResult(false, "Erro ao identificar Servi�o");
+            command.Validate();
+            if (!command.IsValid)
+                return new GenericCommandResult(false, "Identificador unico errado");
 
             var service = await _serviceRepository.GetByIdAsync(command.Id);
 
-            if (service != null)
-                await _serviceRepository.DeleteAsync(service);
+            if (service == null)
+                return new GenericCommandResult(false, "Serviço não encontrado");
+               
+            await _serviceRepository.DeleteAsync(service);
 
             return new GenericCommandResult(true, "Servi�o deletado com sucesso");
         }

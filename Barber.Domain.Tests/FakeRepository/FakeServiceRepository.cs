@@ -10,34 +10,45 @@ namespace Barber.Domain.Tests.FakeRepository
 {
     internal class FakeServiceRepository : IServiceRepository
     {
+        private readonly List<Service> _service = new();
         public Task CreateAsync(Service service)
         {
-            throw new NotImplementedException();
+            _service.Add(service);
+            return Task.CompletedTask;
         }
 
         public Task DeleteAsync(Service service)
         {
-            throw new NotImplementedException();
+            _service.Remove(service);
+            return Task.CompletedTask;
         }
 
         public Task<ICollection<Service>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult((ICollection<Service>)_service);
         }
 
         public Task<ICollection<Service>> GetAllServicesByProfessonalIdAsync(Guid professonal)
         {
-            throw new NotImplementedException();
+            var result = _service.Where(s => s.Professionals.Any(p => p.Id == professonal));
+            return Task.FromResult((ICollection<Service>)result);
         }
 
         public Task<Service> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var service = _service.FirstOrDefault(s => s.Id == id); 
+            return Task.FromResult(service);
         }
 
         public Task UpdateAsync(Service service)
         {
-            throw new NotImplementedException();
+            var existingProfessional = _service.FirstOrDefault(p => p.Id == service.Id);
+            if (existingProfessional != null)
+            {
+                _service.Remove(existingProfessional);
+                _service.Add(service);
+            }
+            return Task.CompletedTask;
         }
     }
 }
