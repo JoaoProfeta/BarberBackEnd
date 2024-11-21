@@ -24,6 +24,9 @@ public class DeleteProfessionalHandle : IHandler<DeleteProfessionalCommandReques
 
             var professonal = await _professonalRepository.GetByIdAsync(command.Id);
 
+            if (professonal == null)
+                return new GenericCommandResult(false, "Falha ao encontrar profissional");
+
             await _professonalRepository.DeleteAsync(professonal);
 
             return new GenericCommandResult(true, "Sucesso ao deletar Profissional");

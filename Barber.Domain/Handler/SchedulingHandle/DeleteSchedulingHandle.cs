@@ -29,7 +29,7 @@ public class DeleteSchedulingHandle : IHandler<DeleteSchedulingCommandRequest>
             var scheduling = await _schedulingRepository.GetByIdAsync(command.Id);
 
             if (scheduling == null)
-                return new GenericCommandResult(false, "Scheduling not found");
+                return new GenericCommandResult(false, "Agendamento não encontrado");
 
             await _schedulingRepository.DeleteAsync(scheduling);
 

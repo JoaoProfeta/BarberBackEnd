@@ -6,43 +6,55 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Barber.Domain.Tests.FakeRepository
+namespace Barber.Domain.Tests.FakeRepository;
+
+internal class FakeSchedulingRepository : ISchedulingRepository
 {
-    internal class FakeSchedulingRepository : ISchedulingRepository
+    private readonly List<Scheduling> _scheduling = new();
+    public Task CreateAsync(Scheduling scheduling)
     {
-        public Task CreateAsync(Scheduling scheduling)
-        {
-            throw new NotImplementedException();
-        }
+        _scheduling.Add(scheduling);
+        return Task.CompletedTask;
+    }
 
-        public Task DeleteAsync(Scheduling scheduling)
-        {
-            throw new NotImplementedException();
-        }
+    public Task DeleteAsync(Scheduling scheduling)
+    {
+        _scheduling.Remove(scheduling);
+        return Task.CompletedTask;
+    }
 
-        public Task<ICollection<Scheduling>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
+    public Task<ICollection<Scheduling>> GetAllAsync()
+    {
+        return Task.FromResult((ICollection<Scheduling>)_scheduling);
+    }
 
-        public Task<ICollection<Scheduling>> GetAllSchedulingByProfessonalId(Guid professonalId)
-        {
-            throw new NotImplementedException();
-        }
+    public Task<ICollection<Scheduling>> GetAllSchedulingByProfessonalId(Guid professonalId)
+    {
+        var result = _scheduling.Where(x => x.ProfessionalSelectedId == professonalId).ToList();
+        return Task.FromResult((ICollection<Scheduling>)result);
+    }
 
-        public Task<ICollection<Service>> GetAllSchedulingByServiceIdAsync(Guid schedulingId)
-        {
-            throw new NotImplementedException();
-        }
+    public Task<ICollection<Scheduling>> GetAllSchedulingByServiceIdAsync(Guid serviceId)
+    {
+        var result = _scheduling.Where(x => x.Services.Any(s => s.Id == serviceId)).ToList();
+        return Task.FromResult((ICollection<Scheduling>)result);
+    }
 
-        public Task<Scheduling> GetByIdAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+    public Task<Scheduling> GetByIdAsync(Guid id)
+    {
+        var result = _scheduling.FirstOrDefault(x => x.Id == id);
+        return Task.FromResult(result);
+    }
 
-        public Task UpdateAsync(Scheduling scheduling)
+    public Task UpdateAsync(Scheduling scheduling)
+    {
+        var existingProfessional = _scheduling.FirstOrDefault(p => p.Id == scheduling.Id);
+        if (existingProfessional != null)
         {
-            throw new NotImplementedException();
+            _scheduling.Remove(existingProfessional);
+            _scheduling.Add(scheduling);
         }
+        return Task.CompletedTask;
     }
 }
+
