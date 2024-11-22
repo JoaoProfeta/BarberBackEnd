@@ -15,9 +15,9 @@ public sealed record UpdateServiceCommandRequest(
     {
         var contract = new Contract<Notification>()
             .Requires()
-            .IsNotNull(Id, "Id", "Selecione um serviço")
-            .IsNotNullOrEmpty(Name, "Name", "Adicione um nome")
-            .IsGreaterOrEqualsThan(Name, 3, "Nome deve ter no minimo 3 letras");
+            .IsFalse(Id == Guid.Empty, "Id", "Id nao pode estar vazio")
+            .IsNotNullOrEmpty(Name, "Name", "O nome nao pode ser vazio")
+            .IsGreaterThan(Name.Length, 3, "Nome", "Nome deve conter no minimo 3 caracteres");
 
         Notifications.AddRange(contract.Notifications);
     }

@@ -18,10 +18,21 @@ public class CreateServiceTests
         Name: "João Vitor",
         Status: Enum.EAvailabilityStatus.Unavailable
         );
+    private readonly CreateServiceCommandRequest _EmptyName = new CreateServiceCommandRequest(
+        Name: string.Empty,
+        Status: Enum.EAvailabilityStatus.Unavailable
+    );
+
+    private readonly CreateServiceCommandRequest _NameLessThanThreeCharacters = new CreateServiceCommandRequest(
+        Name: "JO",
+        Status: Enum.EAvailabilityStatus.Avaliable
+            );
     public CreateServiceTests()
     {
         _InvalidCommand.Validate();
         _ValidCommand.Validate();
+        _EmptyName.Validate();
+        _NameLessThanThreeCharacters.Validate();
     }
     [TestMethod]
     public void Service_Create_Invalid()
@@ -32,6 +43,18 @@ public class CreateServiceTests
     public void Service_Create_Valid()
     {
         Assert.AreEqual(_ValidCommand.IsValid, true);
+    }
+    [TestMethod]
+    public void Message_When_The_Name_Is_Empty()
+    {
+        Assert.AreEqual(_EmptyName.IsValid, false);
+        Assert.AreEqual("O nome nao pode ser vazio", _EmptyName.Notifications.FirstOrDefault()?.Message);
+    }
+    [TestMethod]
+    public void Message_When_Name_Contains_Less_than_3_characters()
+    {
+        Assert.AreEqual(_NameLessThanThreeCharacters.IsValid, false);
+        Assert.AreEqual("Nome deve conter no minimo 3 caracteres", _NameLessThanThreeCharacters.Notifications.FirstOrDefault()?.Message);
     }
 }
 
