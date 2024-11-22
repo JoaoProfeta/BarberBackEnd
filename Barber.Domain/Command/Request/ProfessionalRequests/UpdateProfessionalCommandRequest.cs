@@ -18,9 +18,10 @@ public sealed record UpdateProfessionalCommandRequest(
     {
         var contract = new Contract<Notification>()
             .Requires()
-            .IsNotNull(Id, "Id", "O nome não pode ser vazio")
-            .IsNotNull(ProfessionalId, "Professional ID", "Id do profissional Não pode estar vazio")
-            .IsGreaterOrEqualsThan(ProfessionalName, 3, "Nome deve conter no minimo 3 caracteres");
+            .IsFalse(Id == Guid.Empty, "Id", "Id nao pode estar vazio")
+            .IsFalse(ProfessionalId == Guid.Empty, "Professional ID", "Id do profissional Nao pode estar vazio")
+            .IsNotNullOrEmpty(ProfessionalName, "Nome", "O nome nao pode ser vazio")
+            .IsGreaterThan(ProfessionalName.Length, 3,"Nome","Nome deve conter no minimo 3 caracteres");
 
         Notifications.AddRange(contract.Notifications);
     }

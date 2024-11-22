@@ -25,7 +25,6 @@ public class FakeProfessionalRepository : IProfessionalRepository
     public Task<ICollection<Professional>> GetAllAsync()
     {
         return Task.FromResult((ICollection<Professional>)_professionals);
-
     }
     public Task<ICollection<Professional>> GetAllProfessonalByServiceIdAsync(ICollection<Guid> Id)
     {

@@ -18,9 +18,9 @@ public sealed record CreateSchedulingCommandRequest(
     {
         var contract = new Contract<Notification>()
             .Requires()
-            .IsNotNull(SchedulingTime, "Agendar", "adicione um horario para agendar")
-            .IsNotNull(ProfessionalSelectedId, "Profissional", "Adicione um profissional")
-            .IsGreaterOrEqualsThan(ServicesSelected, 1, "Adicione pelomenos 1 servi�o");
+            .IsFalse(SchedulingTime == DateTime.MinValue, "Agendar", "adicione um horario correto para agendar")
+            .IsFalse(ProfessionalSelectedId == Guid.Empty, "Profissional", "Adicione um profissional")
+            .IsGreaterOrEqualsThan(ServicesSelected?.Count ?? 0, 1, "servicos", "Adicione ao menos 1 servico");
         Notifications.AddRange(contract.Notifications);
     }
 
