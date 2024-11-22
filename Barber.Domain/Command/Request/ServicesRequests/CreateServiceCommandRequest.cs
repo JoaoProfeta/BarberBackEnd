@@ -15,8 +15,8 @@ public sealed record CreateServiceCommandRequest(
     {
         var contract = new Contract<Notification>()
             .Requires()
-            .IsNotNullOrEmpty(Name, "Nome", "Adicione um Nome")
-            .IsGreaterOrEqualsThan(Name, 3, "Nome do servi�o pequeno");
+            .IsNotNullOrEmpty(Name, "Nome", "O nome nao pode ser vazio")
+            .IsGreaterThan(Name.Length, 3, "Nome", "Nome deve conter no minimo 3 caracteres");
         Notifications.AddRange(contract.Notifications);
     }
 }
