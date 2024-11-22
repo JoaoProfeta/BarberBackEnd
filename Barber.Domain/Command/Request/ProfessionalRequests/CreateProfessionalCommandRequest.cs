@@ -16,8 +16,9 @@ public sealed record CreateProfessionalCommandRequest(
     {
         var contract = new Contract<Notification>()
             .Requires()
-            .IsGreaterThan(ProfessionalName.Length, 3, "Nome", "O nome deve conter no minimo 3 letras")
-            .IsNotNullOrEmpty(ProfessionalName, "Nome", "O nome n�o pode ser vazio");
+            .IsFalse(ProfessionalId == Guid.Empty, "Profissional Id", "Id do profissional Nao pode estar vazio")
+            .IsNotNullOrEmpty(ProfessionalName, "Nome", "O nome nao pode ser vazio")
+            .IsGreaterThan(ProfessionalName.Length, 3, "Nome", "Nome deve conter no minimo 3 caracteres");
 
         Notifications.AddRange(contract.Notifications);
     }

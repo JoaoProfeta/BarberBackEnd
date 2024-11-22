@@ -23,14 +23,34 @@ public class CreateSchedulingTests
         SchedulingStatus: Enum.ESchedulingStatus.Accepted,
         ServicesSelected: new List<Service> {
                 new Service("Sobrancelha", status: Enum.EAvailabilityStatus.Avaliable),
-                new Service("Cabelo", status: Enum.EAvailabilityStatus.Unavailable)
-        }
+                new Service("Cabelo", status: Enum.EAvailabilityStatus.Unavailable) }
         );
+    private readonly CreateSchedulingCommandRequest _SchedulingTimeIsNotMinValue = new CreateSchedulingCommandRequest(
+        SchedulingTime: DateTime.MinValue,
+        ProfessionalSelectedId: Guid.NewGuid(),
+        SchedulingStatus: Enum.ESchedulingStatus.Pending,
+        ServicesSelected: new List<Service> { new Service("Cabelo", status: Enum.EAvailabilityStatus.Unavailable) }
+        );
+    private readonly CreateSchedulingCommandRequest _ProfessionalIdEmpty = new CreateSchedulingCommandRequest(
+        SchedulingTime: DateTime.Now,
+        ProfessionalSelectedId: Guid.Empty,
+        SchedulingStatus: Enum.ESchedulingStatus.Pending,
+        ServicesSelected: new List<Service> { new Service("Cabelo", status: Enum.EAvailabilityStatus.Unavailable) }
+        );
+    private readonly CreateSchedulingCommandRequest _SeriviceEmpty = new CreateSchedulingCommandRequest(
+    SchedulingTime: DateTime.Now,
+    ProfessionalSelectedId: Guid.NewGuid(),
+    SchedulingStatus: Enum.ESchedulingStatus.Pending,
+    ServicesSelected: new List<Service>()
+    );
 
     public CreateSchedulingTests()
     {
         _InvalidCommand.Validate();
         _ValidCommand.Validate();
+        _SchedulingTimeIsNotMinValue.Validate();
+        _ProfessionalIdEmpty.Validate();
+        _SeriviceEmpty.Validate();
     }
     [TestMethod]
     public void Scheduling_Create_Fail()
@@ -41,6 +61,24 @@ public class CreateSchedulingTests
     public void Scheduling_Create_Success()
     {
         Assert.AreEqual(_ValidCommand.IsValid, true);
+    }
+    [TestMethod]
+    public void Message_When_The_DateTime_Min_Value()
+    {
+        Assert.AreEqual(_SchedulingTimeIsNotMinValue.IsValid, false);
+        Assert.AreEqual("adicione um horario correto para agendar", _SchedulingTimeIsNotMinValue.Notifications.FirstOrDefault()?.Message);
+    }
+    [TestMethod]
+    public void Message_When_The_Professional_Id_Is_Empty()
+    {
+        Assert.AreEqual(_ProfessionalIdEmpty.IsValid, false);
+        Assert.AreEqual("Adicione um profissional", _ProfessionalIdEmpty.Notifications.FirstOrDefault()?.Message);
+    }
+    [TestMethod]
+    public void Message_When_Service_Is_Empty()
+    {
+        Assert.IsFalse(_SeriviceEmpty.IsValid, "lista Serviço deve ser falsa quando estiver vazia");
+        Assert.AreEqual("Adicione ao menos 1 servico", _SeriviceEmpty.Notifications.FirstOrDefault()?.Message);
     }
 }
 

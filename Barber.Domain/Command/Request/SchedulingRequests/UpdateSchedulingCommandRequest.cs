@@ -23,9 +23,10 @@ public sealed record UpdateSchedulingCommandRequest(
     {
         var contract = new Contract<Notification>()
             .Requires()
-            .IsNotNull(SchedulingTime, "data", "Selecione o horario de agendamento")
-            .IsNotNull(ProfessionalSelectedId, "Profissional", "Selecione o prifissional")
-            .IsGreaterOrEqualsThan(ServicesSelected, 1, "Selecione ao menos 1 serviço");
+            .IsFalse(Id == Guid.Empty, "Id", "Id nao pode estar vazio")
+            .IsFalse(SchedulingTime == DateTime.MinValue, "data", "Adicione um horario correto para agendar")
+            .IsFalse(ProfessionalSelectedId == Guid.Empty, "Profissional", "Adicione um prifissional")
+            .IsGreaterOrEqualsThan(ServicesSelected?.Count ?? 0, 1, "Servico", "Adicione ao menos 1 servico");
 
         Notifications.AddRange(contract.Notifications);
     }
