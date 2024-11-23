@@ -15,6 +15,7 @@ public class Scheduling : Entity
         SchedulingStatus = status;
         Services = servicesSelected;
     }
+    
     public DateTime SchedulingTime { get; private set; }
     public Guid ProfessionalSelectedId { get; private set; }
     public ESchedulingStatus SchedulingStatus { get; private set; }
