@@ -24,10 +24,10 @@ public class CreateSchedulingHandler : IHandler<CreateSchedulingCommandRequest>
 
             var scheduling = new Scheduling(
                command.SchedulingTime,
-               command.ProfessionalSelectedId,
-               command.SchedulingStatus,
-               command.ServicesSelected
+               command.SchedulingStatus
                );
+            var professionalsServices = command.ProfessionalService.FirstOrDefault();
+            scheduling.AddProfessionalService(professionalsServices.ServiceId, professionalsServices.ProfessionalId);
 
             await _schedulingRepository.CreateAsync(scheduling);
 
@@ -38,10 +38,8 @@ public class CreateSchedulingHandler : IHandler<CreateSchedulingCommandRequest>
                 {
                     scheduling.Id,
                     scheduling.SchedulingTime,
-                    scheduling.ProfessionalSelectedId,
                     scheduling.SchedulingStatus,
-                    scheduling.Services
-
+                    scheduling.ProfessionalsServices
                 }
              );
         }
