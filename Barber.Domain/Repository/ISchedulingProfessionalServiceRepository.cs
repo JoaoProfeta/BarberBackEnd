@@ -7,8 +7,8 @@ public interface ISchedulingProfessionalServiceRepository
     Task CreateAync(SchedulingProfessionalServiceJoint schedulingProfessionalServiceJoint);
     Task DeleteAsync(Guid id);
     Task UpdateAsync(SchedulingProfessionalServiceJoint schedulingProfessionalServiceJoint);
-    Task GetAllAsync();
     Task<SchedulingProfessionalServiceJoint> GetByIdAsync(Guid id);
+    Task<ICollection<SchedulingProfessionalServiceJoint>> GetAllAsync();
     Task<ICollection<SchedulingProfessionalServiceJoint>> GetBySchedulingId(Guid schedulingId);
     Task<ICollection<ProfessionalServiceJoint>> GetAllByProfessionalId(Guid professionalId);
     Task<ICollection<ProfessionalServiceJoint>> GetAllByServiceId(Guid serviceId);
