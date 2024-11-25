@@ -14,10 +14,10 @@ public static class SchedulingQueries
     }
     public static Expression<Func<Scheduling, bool>> GetAllSchedulingByProfessonalId(Guid professonalId)
     {
-        return x => x.ProfessionalSelectedId == professonalId;
+        return x => x.ProfessionalsServices.FirstOrDefault().ProfessionalId == professonalId;
     }
     public static Expression<Func<Scheduling, bool>> GetAllSchedulingByServicecId(Guid serviceId)
     {
-        return x => x.Services.Any(s => s.Id == serviceId);
+        return x => x.ProfessionalsServices.FirstOrDefault().ServiceId == serviceId;
     }
 }

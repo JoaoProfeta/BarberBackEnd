@@ -5,34 +5,33 @@ public class Scheduling : Entity
 {
     public Scheduling(
         DateTime schedulingTime,
-        Guid professionalId,
-        ESchedulingStatus status,
-        ICollection<Service> servicesSelected
+        ESchedulingStatus status
         )
     {
         SchedulingTime = schedulingTime;
-        ProfessionalSelectedId = professionalId;
         SchedulingStatus = status;
-        Services = servicesSelected;
+        SchedulingProfessionalsServices = new List<SchedulingProfessionalServiceJoint>();
     }
-    
     public DateTime SchedulingTime { get; private set; }
-    public Guid ProfessionalSelectedId { get; private set; }
     public ESchedulingStatus SchedulingStatus { get; private set; }
-    public ICollection<Service> Services { get; private set; } = new List<Service>();
+    public ICollection<SchedulingProfessionalServiceJoint> SchedulingProfessionalsServices { get; private set; }
     public void UpdateDate(DateTime date) => SchedulingTime = date;
-    public void UpdateProfessonalSelected(Guid professionalId) => ProfessionalSelectedId = professionalId;
     public void UpdateSchedulingStatus(ESchedulingStatus status) => SchedulingStatus = status;
-    public void AddService(Service service)
+
+    public void AddProfessionalService(IEnumerable<ProfessionalServiceJoint> professionalServiceJoint)
     {
-        if (service == null)
-            throw new ArgumentNullException(nameof(service));
-        Services.Add(service);
+        foreach (var item in professionalServiceJoint)
+        {
+            if (!SchedulingProfessionalsServices.Any(s => s.ProfessionalServiceJointId == item.Id))
+            {
+                var create = new SchedulingProfessionalServiceJoint(this.Id, item.Id);
+                if (!SchedulingProfessionalsServices.Contains(create))
+                    SchedulingProfessionalsServices.Add(create);
+            }
+        }
     }
-    public void RemoveService(Service service)
+    public void RemoveProfessionalService(ProfessionalServiceJoint professionalServiceJoint)
     {
-        if (service == null)
-            throw new ArgumentNullException(nameof(service));
-        Services.Remove(service);
+        SchedulingProfessionalsServices.Remove(new SchedulingProfessionalServiceJoint(this.Id, professionalServiceJoint.Id));
     }
 }
