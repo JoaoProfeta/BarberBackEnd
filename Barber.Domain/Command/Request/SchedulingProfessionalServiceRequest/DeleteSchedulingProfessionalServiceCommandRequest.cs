@@ -1,9 +1,10 @@
-﻿using Flunt.Notifications;
+﻿using Barber.Domain.Command.Contracts;
+using Flunt.Notifications;
 using Flunt.Validations;
 
 namespace Barber.Domain.Command.Request.SchedulingProfessionalServiceRequest;
 
-public sealed record DeleteSchedulingProfessionalServiceCommandRequest(Guid Id)
+public sealed record DeleteSchedulingProfessionalServiceCommandRequest(Guid Id) : ICommand
 {
     public List<Notification> Notifications { get; private set; } = new();
     public bool IsValid => Notifications.Count == 0;
