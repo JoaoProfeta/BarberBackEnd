@@ -18,17 +18,16 @@ public class Scheduling : Entity
     public void UpdateDate(DateTime date) => SchedulingTime = date;
     public void UpdateSchedulingStatus(ESchedulingStatus status) => SchedulingStatus = status;
 
-    public void AddProfessionalService(IEnumerable<ProfessionalServiceJoint> professionalServiceJoint)
+    public void AddProfessionalService(Guid schedulingId,Guid professionalServiceJointId)
     {
-        foreach (var item in professionalServiceJoint)
-        {
-            if (!SchedulingProfessionalsServices.Any(s => s.ProfessionalServiceJointId == item.Id))
+        
+            if (!SchedulingProfessionalsServices.Any(s => s.ProfessionalServiceJointId == professionalServiceJointId))
             {
-                var create = new SchedulingProfessionalServiceJoint(this.Id, item.Id);
+                var create = new SchedulingProfessionalServiceJoint(schedulingId, professionalServiceJointId);
                 if (!SchedulingProfessionalsServices.Contains(create))
                     SchedulingProfessionalsServices.Add(create);
             }
-        }
+        
     }
     public void RemoveProfessionalService(ProfessionalServiceJoint professionalServiceJoint)
     {
