@@ -1,9 +1,0 @@
-D:\Projects\barber\BarberBackEnd\Barber.Domain\obj\Debug\net8.0\Barber.Domain.csproj.AssemblyReference.cache
-D:\Projects\barber\BarberBackEnd\Barber.Domain\obj\Debug\net8.0\Barber.Domain.GeneratedMSBuildEditorConfig.editorconfig
-D:\Projects\barber\BarberBackEnd\Barber.Domain\obj\Debug\net8.0\Barber.Domain.AssemblyInfoInputs.cache
-D:\Projects\barber\BarberBackEnd\Barber.Domain\obj\Debug\net8.0\Barber.Domain.AssemblyInfo.cs
-D:\Projects\barber\BarberBackEnd\Barber.Domain\obj\Debug\net8.0\Barber.Domain.csproj.CoreCompileInputs.cache
-D:\Projects\barber\BarberBackEnd\Barber.Domain\obj\Debug\net8.0\Barber.Domain.sourcelink.json
-D:\Projects\barber\BarberBackEnd\Barber.Domain\obj\Debug\net8.0\Barber.Domain.dll
-D:\Projects\barber\BarberBackEnd\Barber.Domain\obj\Debug\net8.0\refint\Barber.Domain.dll
-D:\Projects\barber\BarberBackEnd\Barber.Domain\obj\Debug\net8.0\Barber.Domain.pdb
