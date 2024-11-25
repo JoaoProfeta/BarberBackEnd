@@ -10,7 +10,7 @@ public sealed record UpdateProfessionalCommandRequest(
         Guid ProfessionalId,
         string ProfessionalName,
         EAvailabilityStatus Status,
-        ICollection<Service>? Services) : ICommand
+        ICollection<ProfessionalServiceJoint> Services) : ICommand
 {
     public List<Notification> Notifications { get; private set; } = new();
     public bool IsValid => Notifications.Count == 0;

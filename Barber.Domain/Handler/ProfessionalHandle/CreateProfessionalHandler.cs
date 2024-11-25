@@ -25,8 +25,7 @@ public class CreateProfessionalHandler : IHandler<CreateProfessionalCommandReque
             var professonal = new Professional(
                 command.ProfessionalId,
                 command.ProfessionalName,
-                command.Status,
-                command.Services
+                command.Status
                 );
 
             await _professonalRepository.CreateAsync(professonal);
@@ -38,7 +37,6 @@ public class CreateProfessionalHandler : IHandler<CreateProfessionalCommandReque
                     professonal.ProfessionalId,
                     professonal.ProfessionalName,
                     professonal.Status,
-                    professonal.Services
                 });
         }
         catch (Exception ex)

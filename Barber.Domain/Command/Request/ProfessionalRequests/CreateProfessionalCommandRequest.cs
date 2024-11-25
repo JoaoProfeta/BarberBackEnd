@@ -7,8 +7,8 @@ namespace Barber.Domain.Command.Request.ProfessonalRequests;
 public sealed record CreateProfessionalCommandRequest(
         Guid ProfessionalId,
         string ProfessionalName,
-        EAvailabilityStatus Status,
-        ICollection<Service> Services) : ICommand
+        EAvailabilityStatus Status
+        ) : ICommand
 {
     public List<Notification> Notifications { get; private set; } = new();
     public bool IsValid => Notifications.Count == 0;

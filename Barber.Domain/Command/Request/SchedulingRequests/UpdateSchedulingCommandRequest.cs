@@ -14,7 +14,7 @@ public sealed record UpdateSchedulingCommandRequest(
     Guid Id,
     DateTime SchedulingTime,
     ESchedulingStatus Status,
-    ICollection<ProfessionalServiceJoint> ProfessionalService) : ICommand
+    ICollection<SchedulingProfessionalServiceJoint> ProfessionalService) : ICommand
 {
     public List<Notification> Notifications { get; private set; } = new();
     public bool IsValid => Notifications.Count == 0;
@@ -23,9 +23,9 @@ public sealed record UpdateSchedulingCommandRequest(
         var contract = new Contract<Notification>()
             .Requires()
             .IsFalse(Id == Guid.Empty, "Id", "Id nao pode estar vazio")
-            .IsFalse(ProfessionalService.FirstOrDefault().ServiceId == Guid.Empty, "Servico", "Adicione um Servico")
-            .IsFalse(ProfessionalService.FirstOrDefault().ProfessionalId == Guid.Empty, "Profissional", "Adicione um profissional")
-            .IsGreaterOrEqualsThan(ProfessionalService?.Count ?? 0, 1, "Professional e serviços", "Adicione ao menos 1 servico e seu profissional");
+            .IsFalse(ProfessionalService.FirstOrDefault().SchedulingId == Guid.Empty, "Servico", "Adicione um Servico")
+            .IsFalse(ProfessionalService.FirstOrDefault().ProfessionalServiceJointId == Guid.Empty, "Profissional e servico", "Adicione um servico e um profissional")
+            .IsGreaterOrEqualsThan(ProfessionalService?.Count ?? 0, 1, "Professional e serviços", "Adicione um servico e um profissional");
 
         Notifications.AddRange(contract.Notifications);
     }
