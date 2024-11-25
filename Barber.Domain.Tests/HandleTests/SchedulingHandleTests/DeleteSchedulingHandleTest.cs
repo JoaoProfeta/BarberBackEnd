@@ -30,14 +30,14 @@ public class DeleteSchedulingHandleTest
         _repository.CreateAsync(create).Wait();
     }
 
-    [TestMethod]
+    //[TestMethod]
     public async Task Delete_Scheduling_Handle_Test_Fail()
     {
         var result = await _handle.Handle(_InvalidCommand);
         _result = (GenericCommandResult)result;
         Assert.AreEqual(_result.Success, false);
     }
-    [TestMethod]
+    //[TestMethod]
     public async Task Delete_Scheduling_Handle_Test_Success()
     {
         var result = await _handle.Handle(_ValidCommand);

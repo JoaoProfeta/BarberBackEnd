@@ -8,9 +8,8 @@ namespace Barber.Domain.Command.Request.SchedulingRequests;
 
 public sealed record CreateSchedulingCommandRequest(
         DateTime SchedulingTime,
-        Guid ProfessionalSelectedId,
         ESchedulingStatus SchedulingStatus,
-        ICollection<Service> ServicesSelected) : ICommand
+        ICollection<ProfessionalServiceJoint> ProfessionalService) : ICommand
 {
     public List<Notification> Notifications { get; private set; } = new();
     public bool IsValid => Notifications.Count == 0;
@@ -19,8 +18,9 @@ public sealed record CreateSchedulingCommandRequest(
         var contract = new Contract<Notification>()
             .Requires()
             .IsFalse(SchedulingTime == DateTime.MinValue, "Agendar", "adicione um horario correto para agendar")
-            .IsFalse(ProfessionalSelectedId == Guid.Empty, "Profissional", "Adicione um profissional")
-            .IsGreaterOrEqualsThan(ServicesSelected?.Count ?? 0, 1, "servicos", "Adicione ao menos 1 servico");
+            .IsFalse(ProfessionalService.FirstOrDefault().ServiceId == Guid.Empty, "Servico", "Adicione um Servico")
+            .IsFalse(ProfessionalService.FirstOrDefault().ProfessionalId == Guid.Empty, "Profissional", "Adicione um profissional")
+            .IsGreaterOrEqualsThan(ProfessionalService?.Count ?? 0, 1, "Professional e serviços", "Adicione ao menos 1 servico e seu profissional");
         Notifications.AddRange(contract.Notifications);
     }
 

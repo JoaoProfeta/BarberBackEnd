@@ -14,7 +14,6 @@ public class ProfessionalQueriesTest
         new Service(name: "Pezinho", status: Enum.EAvailabilityStatus.Avaliable),
     };
     private List<Professional> _professionals = new();
-
     public ProfessionalQueriesTest()
     {
         _professionals.Add(new Professional(
@@ -35,7 +34,6 @@ public class ProfessionalQueriesTest
             stats: Enum.EAvailabilityStatus.Avaliable,
             services: new List<Service> { _services[2], _services[3] }));
     }
-
     [TestMethod]
     public void Professional_Query_Get_All()
     {

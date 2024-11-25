@@ -1,6 +1,7 @@
 ﻿using Barber.Domain.Command;
 using Barber.Domain.Command.Contracts;
 using Barber.Domain.Command.Request.SchedulingRequests;
+using Barber.Domain.Entity;
 using Barber.Domain.Handler.Contracts;
 using Barber.Domain.Repository;
 
@@ -32,8 +33,8 @@ public class UpdateSchedulingHandle : IHandler<UpdateSchedulingCommandRequest>
             if (command.Status != scheduling.SchedulingStatus)
                 scheduling.UpdateSchedulingStatus(command.Status);
 
-            if (command.ProfessionalSelectedId != scheduling.ProfessionalSelectedId)
-                scheduling.UpdateProfessonalSelected(command.ProfessionalSelectedId);
+            if (command.ProfessionalService != null)
+                scheduling.AddProfessionalService(new ProfessionalService  ());
 
             await _schedulingRepository.UpdateAsync(scheduling);
 
