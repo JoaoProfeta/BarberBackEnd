@@ -1,15 +1,14 @@
-﻿
 
 using Barber.Domain.Entity;
 
 namespace Barber.Domain.Repository;
-public interface iProfessionalServiceRepository
+
+public interface IProfessionalServiceRepository
 {
     Task CreateAync(ProfessionalServiceJoint professionalServiceJoint);
-    Task DeleteAsync(Guid id);
+    Task DeleteAsync(ProfessionalServiceJoint professionalServiceJoint);
     Task GetAllAsync();
-    Task GetByIdAsync(Guid id);
+    Task<ProfessionalServiceJoint> GetByIdAsync(Guid id);
     Task<ICollection<ProfessionalServiceJoint>> GetAllByProfessionalId(Guid professionalId);
     Task<ICollection<ProfessionalServiceJoint>> GetAllByServiceId(Guid serviceId);
-    
-}
+
