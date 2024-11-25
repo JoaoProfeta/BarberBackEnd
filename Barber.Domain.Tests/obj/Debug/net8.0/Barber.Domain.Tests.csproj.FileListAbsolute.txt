@@ -1,3 +1,0 @@
-D:\Projects\barber\BarberBackEnd\Barber.Domain.Tests\obj\Debug\net8.0\Barber.Domain.Tests.dll
-D:\Projects\barber\BarberBackEnd\Barber.Domain.Tests\obj\Debug\net8.0\refint\Barber.Domain.Tests.dll
-D:\Projects\barber\BarberBackEnd\Barber.Domain.Tests\obj\Debug\net8.0\Barber.Domain.Tests.pdb

@@ -34,7 +34,13 @@ public class UpdateSchedulingHandle : IHandler<UpdateSchedulingCommandRequest>
                 scheduling.UpdateSchedulingStatus(command.Status);
 
             if (command.ProfessionalService != null)
-                scheduling.AddProfessionalService(new ProfessionalService  ());
+            {
+                foreach (var item in command.ProfessionalService)
+                {
+                    scheduling.AddProfessionalService(scheduling.Id, item.Id);
+
+                }
+            }
 
             await _schedulingRepository.UpdateAsync(scheduling);
 
@@ -45,9 +51,7 @@ public class UpdateSchedulingHandle : IHandler<UpdateSchedulingCommandRequest>
                 {
                     scheduling.Id,
                     scheduling.SchedulingTime,
-                    scheduling.ProfessionalSelectedId,
                     scheduling.SchedulingStatus,
-                    scheduling.Services
                 });
         }
         catch (Exception ex)
