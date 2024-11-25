@@ -1,4 +1,4 @@
-﻿using Barber.Domain.Entity;
+using Barber.Domain.Entity;
 
 namespace Barber.Domain.Repository;
 

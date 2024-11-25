@@ -1,4 +1,5 @@
-﻿using Barber.Domain.Entity;
+
+using Barber.Domain.Entity;
 
 namespace Barber.Domain.Repository;
 
@@ -10,4 +11,4 @@ public interface IProfessionalServiceRepository
     Task<ProfessionalServiceJoint> GetByIdAsync(Guid id);
     Task<ICollection<ProfessionalServiceJoint>> GetAllByProfessionalId(Guid professionalId);
     Task<ICollection<ProfessionalServiceJoint>> GetAllByServiceId(Guid serviceId);
-}
+
