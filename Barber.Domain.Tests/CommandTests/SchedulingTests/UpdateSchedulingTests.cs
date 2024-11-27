@@ -14,45 +14,52 @@ public class UpdateSchedulingTests
     private readonly UpdateSchedulingCommandRequest _InvalidCommand = new UpdateSchedulingCommandRequest(
         Id: Guid.NewGuid(),
         SchedulingTime: DateTime.Now,
-        ProfessionalSelectedId: Guid.NewGuid(),
         Status: Enum.ESchedulingStatus.Pending,
-        ServicesSelected: new List<Service> { }
+        ProfessionalService: new List<SchedulingProfessionalServiceJoint>() {
+            new SchedulingProfessionalServiceJoint( schedulingId : Guid.NewGuid(), professionalServiceJointsId: Guid.Empty),
+        }
+
         );
     private readonly UpdateSchedulingCommandRequest _ValidCommand = new UpdateSchedulingCommandRequest(
         Id: Guid.NewGuid(),
         SchedulingTime: DateTime.Now,
-        ProfessionalSelectedId: Guid.NewGuid(),
         Status: Enum.ESchedulingStatus.Pending,
-        ServicesSelected: new List<Service> { new Service(name: "sobrancelha", status: Enum.EAvailabilityStatus.Unavailable) }
+        ProfessionalService: new List<SchedulingProfessionalServiceJoint>() {
+            new SchedulingProfessionalServiceJoint( schedulingId : Guid.NewGuid(), professionalServiceJointsId: Guid.Empty),
+        }
         );
 
     private readonly UpdateSchedulingCommandRequest _IdEmpty = new UpdateSchedulingCommandRequest(
         Id: Guid.Empty,
         SchedulingTime: DateTime.Now,
-        ProfessionalSelectedId: Guid.Empty,
         Status: Enum.ESchedulingStatus.Pending,
-        ServicesSelected: new List<Service> { new Service("Cabelo", status: Enum.EAvailabilityStatus.Unavailable) }
+        ProfessionalService: new List<SchedulingProfessionalServiceJoint>() {
+            new SchedulingProfessionalServiceJoint( schedulingId : Guid.NewGuid(), professionalServiceJointsId: Guid.Empty),
+        }
         );
     private readonly UpdateSchedulingCommandRequest _SchedulingTimeIsNotMinValue = new UpdateSchedulingCommandRequest(
         Id: Guid.NewGuid(),
         SchedulingTime: DateTime.MinValue,
-        ProfessionalSelectedId: Guid.NewGuid(),
         Status: Enum.ESchedulingStatus.Pending,
-        ServicesSelected: new List<Service> { new Service("Cabelo", status: Enum.EAvailabilityStatus.Unavailable) }
+        ProfessionalService: new List<SchedulingProfessionalServiceJoint>() {
+            new SchedulingProfessionalServiceJoint( schedulingId : Guid.NewGuid(), professionalServiceJointsId: Guid.Empty),
+        }
         );
     private readonly UpdateSchedulingCommandRequest _ProfessionalIdEmpty = new UpdateSchedulingCommandRequest(
         Id: Guid.NewGuid(),
         SchedulingTime: DateTime.Now,
-        ProfessionalSelectedId: Guid.Empty,
         Status: Enum.ESchedulingStatus.Pending,
-        ServicesSelected: new List<Service> { new Service("Cabelo", status: Enum.EAvailabilityStatus.Unavailable) }
+        ProfessionalService: new List<SchedulingProfessionalServiceJoint>() {
+            new SchedulingProfessionalServiceJoint( schedulingId : Guid.NewGuid(), professionalServiceJointsId: Guid.Empty),
+        }
         );
     private readonly UpdateSchedulingCommandRequest _SeriviceEmpty = new UpdateSchedulingCommandRequest(
     Id: Guid.NewGuid(),
     SchedulingTime: DateTime.Now,
-    ProfessionalSelectedId: Guid.NewGuid(),
     Status: Enum.ESchedulingStatus.Pending,
-    ServicesSelected: new List<Service>()
+        ProfessionalService: new List<SchedulingProfessionalServiceJoint>() {
+            new SchedulingProfessionalServiceJoint( schedulingId : Guid.NewGuid(), professionalServiceJointsId: Guid.Empty),
+        }
     );
     public UpdateSchedulingTests()
     {

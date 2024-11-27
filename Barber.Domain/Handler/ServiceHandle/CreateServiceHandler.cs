@@ -7,7 +7,7 @@ using Barber.Domain.Repository;
 
 namespace Barber.Domain.Handler.ServiceHandle;
 
-public class CreateServiceHandler : IHandler<CreateServiceCommandRequestS
+public class CreateServiceHandler : IHandler<CreateServiceCommandRequest>
 {
     private readonly IServiceRepository _serviceRepository;
     public CreateServiceHandler(IServiceRepository serviceRepository)

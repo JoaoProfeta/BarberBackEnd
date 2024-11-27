@@ -13,8 +13,8 @@ public class UpdateSchedulingProfessionalServiceHandle : IHandler<UpdateScheduli
 	{
 		_repository = repository;
 	}
-    public async Task<ICommandResult> Handle(UpdateSchedulingProfessionalServiceCommandRequest command)
-    {
+	public async Task<ICommandResult> Handle(UpdateSchedulingProfessionalServiceCommandRequest command)
+	{
 		try
 		{
 			command.Validate();
@@ -30,8 +30,8 @@ public class UpdateSchedulingProfessionalServiceHandle : IHandler<UpdateScheduli
 		}
 		catch (Exception)
 		{
-            return new GenericCommandResult(false, "Erro ao atualiar agendamento");
-        }
-    }
+			return new GenericCommandResult(false, "Erro ao atualiar agendamento");
+		}
+	}
 }
 

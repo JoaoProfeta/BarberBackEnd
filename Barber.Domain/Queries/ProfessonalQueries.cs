@@ -18,6 +18,6 @@ public static class ProfessonalQueries
     }
     public static Expression<Func<Professional, bool>> GetAllProfessonalBySchedulingId(Guid scheduleId)
     {
-        return x => x.Schedulings.Any(s => s.Id == scheduleId);
+        return x => x.Services.Any(s => s.ServiceId == scheduleId);
     }
 }
