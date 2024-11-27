@@ -21,24 +21,23 @@ public class UpdateSchedulingHandleTests
         var professionalSelected = Guid.NewGuid();
         Scheduling create = new Scheduling(
                 schedulingTime: DateTime.Now,
-                professionalSelected,
-                status: Enum.ESchedulingStatus.Rejected,
-                servicesSelected: new List<Service> { new Service(name: "sobrancelha", status: Enum.EAvailabilityStatus.Unavailable) }
+                status: Enum.ESchedulingStatus.Rejected
+
                 );
         _repository.CreateAsync(create).Wait();
         _InvalidCommand = new UpdateSchedulingCommandRequest(
             Id: Guid.NewGuid(),
             SchedulingTime: DateTime.Now,
-            ProfessionalSelectedId: Guid.NewGuid(),
             Status: Enum.ESchedulingStatus.Pending,
-            ServicesSelected: new List<Service>  { new Service(name: "Cabelo", status: Enum.EAvailabilityStatus.Unavailable)}
+            ProfessionalService: new List<SchedulingProfessionalServiceJoint>() { new SchedulingProfessionalServiceJoint(Guid.NewGuid(), Guid.Empty) }
+
             );
         _ValidCommand = new UpdateSchedulingCommandRequest(
             Id: create.Id,
             SchedulingTime: DateTime.Now,
-            ProfessionalSelectedId: Guid.NewGuid(),
             Status: Enum.ESchedulingStatus.Accepted,
-            ServicesSelected: new List<Service> { new Service(name: "Cabelo", status: Enum.EAvailabilityStatus.Unavailable) }
+            ProfessionalService: new List<SchedulingProfessionalServiceJoint>() { new SchedulingProfessionalServiceJoint(Guid.NewGuid(), Guid.Empty) }
+
             );
     }
     //[TestMethod]

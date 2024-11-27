@@ -13,8 +13,8 @@ public class DeleteSchedulingProfessionalServiceHandle : IHandler<DeleteScheduli
 	{
 		_repository = repository;
 	}
-    public async Task<ICommandResult> Handle(DeleteSchedulingProfessionalServiceCommandRequest command)
-    {
+	public async Task<ICommandResult> Handle(DeleteSchedulingProfessionalServiceCommandRequest command)
+	{
 		try
 		{
 			command.Validate();
@@ -25,13 +25,13 @@ public class DeleteSchedulingProfessionalServiceHandle : IHandler<DeleteScheduli
 			if (toDelete == null)
 				return new GenericCommandResult(false, "Erro ao encontrar Agendamento");
 
-			await _repository.DeleteAsync(toDelete.Id);
+			await _repository.DeleteAsync(toDelete);
 			return new GenericCommandResult(true, "Sucesso ao atrelar profissional e servico ao agendamento");
 		}
 		catch (Exception ex)
 		{
-            return new GenericCommandResult(false, "Erro ao atrelar profissional e servico ao agendamento");
-        }
-    }
+			return new GenericCommandResult(false, "Erro ao atrelar profissional e servico ao agendamento");
+		}
+	}
 }
 

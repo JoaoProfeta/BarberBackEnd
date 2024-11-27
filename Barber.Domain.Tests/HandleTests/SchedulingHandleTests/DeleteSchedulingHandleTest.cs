@@ -21,9 +21,7 @@ public class DeleteSchedulingHandleTest
         _handle = new DeleteSchedulingHandle(_repository);
         Scheduling create = new Scheduling(
                 schedulingTime: DateTime.Now,
-                Guid.NewGuid(),
-                status: Enum.ESchedulingStatus.Accepted,
-                servicesSelected: new List<Service> { new Service(name: "sobrancelha", status: Enum.EAvailabilityStatus.Unavailable) }
+                status: Enum.ESchedulingStatus.Accepted
                 );
         _InvalidCommand = new DeleteSchedulingCommandRequest(Id: Guid.NewGuid());
         _ValidCommand = new DeleteSchedulingCommandRequest(Id: create.Id);

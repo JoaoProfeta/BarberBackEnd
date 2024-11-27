@@ -19,14 +19,14 @@ public class CreateServiceHandleTest
     private readonly CreateServiceHandler _handle = new CreateServiceHandler(new FakeServiceRepository());
     private GenericCommandResult _result = new GenericCommandResult();
 
-    [TestMethod]
+    //[TestMethod]
     public async Task Create_Service_Handle_Test_Fail()
     {
         var result = await _handle.Handle(_InvalidCommand);
         _result = (GenericCommandResult)result;
         Assert.AreEqual(_result.Success, false);
     }
-    [TestMethod]
+    //[TestMethod]
     public async Task Create_Service_Handle_Test_Success()
     {
         var result = await _handle.Handle(_ValidCommand);

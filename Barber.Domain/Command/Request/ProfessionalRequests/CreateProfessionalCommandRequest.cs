@@ -1,5 +1,4 @@
 using Barber.Domain.Command.Contracts;
-using Barber.Domain.Entity;
 using Barber.Domain.Enum;
 using Flunt.Notifications;
 using Flunt.Validations;
