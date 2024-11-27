@@ -27,12 +27,12 @@ internal class FakeSchedulingRepository : ISchedulingRepository
     }
     public Task<ICollection<Scheduling>> GetAllSchedulingByProfessonalId(Guid professonalId)
     {
-        var result = _scheduling.Where(x => x.ProfessionalSelectedId == professonalId).ToList();
+        var result = _scheduling.Where(x => x.SchedulingProfessionalsServices.Any(p => p.ProfessionalServiceJoint.ProfessionalId == professonalId)).ToList();
         return Task.FromResult((ICollection<Scheduling>)result);
     }
     public Task<ICollection<Scheduling>> GetAllSchedulingByServiceIdAsync(Guid serviceId)
     {
-        var result = _scheduling.Where(x => x.Services.Any(s => s.Id == serviceId)).ToList();
+        var result = _scheduling.Where(x => x.SchedulingProfessionalsServices.Any(s => s.ProfessionalServiceJoint.ServiceId == serviceId)).ToList();
         return Task.FromResult((ICollection<Scheduling>)result);
     }
     public Task<Scheduling> GetByIdAsync(Guid id)
