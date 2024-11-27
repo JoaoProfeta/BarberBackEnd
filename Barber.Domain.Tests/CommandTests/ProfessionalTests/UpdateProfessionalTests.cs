@@ -15,43 +15,37 @@ public class UpdateProfessionalTests
         Id: Guid.NewGuid(),
         ProfessionalId: Guid.NewGuid(),
         ProfessionalName: "",
-        Status: Enum.EAvailabilityStatus.Unavailable,
-        Services: new List<Service> { new Service(name: "Sobrancelha", status: Enum.EAvailabilityStatus.Avaliable) }
+        Status: Enum.EAvailabilityStatus.Unavailable
         );
     private readonly UpdateProfessionalCommandRequest _ValidCommand = new UpdateProfessionalCommandRequest(
         Id: Guid.NewGuid(),
         ProfessionalId: Guid.NewGuid(),
         ProfessionalName: "Joao Vitor",
-        Status: Enum.EAvailabilityStatus.Unavailable,
-        Services: new List<Service> { new Service(name: "sobrancelha", status: Enum.EAvailabilityStatus.Unavailable) }
+        Status: Enum.EAvailabilityStatus.Unavailable
         );
     private readonly UpdateProfessionalCommandRequest _EmptyName = new UpdateProfessionalCommandRequest(
            Id: Guid.NewGuid(),
            ProfessionalId: Guid.NewGuid(),
            ProfessionalName: string.Empty,
-           Status: Enum.EAvailabilityStatus.Avaliable,
-           Services: new List<Service> { }
+           Status: Enum.EAvailabilityStatus.Avaliable
             );
     private readonly UpdateProfessionalCommandRequest _NameLessThanThreeCharacters = new UpdateProfessionalCommandRequest(
            Id: Guid.NewGuid(),
            ProfessionalId: Guid.NewGuid(),
            ProfessionalName: "JO",
-           Status: Enum.EAvailabilityStatus.Avaliable,
-           Services: new List<Service> { }
+           Status: Enum.EAvailabilityStatus.Avaliable
             );
     private readonly UpdateProfessionalCommandRequest _IdEmpty = new UpdateProfessionalCommandRequest(
            Id: Guid.Empty,
            ProfessionalId: Guid.NewGuid(),
            ProfessionalName: "JOAO",
-           Status: Enum.EAvailabilityStatus.Avaliable,
-           Services: new List<Service> { }
+           Status: Enum.EAvailabilityStatus.Avaliable
             );
     private readonly UpdateProfessionalCommandRequest _ProfessionalIdEmpty = new UpdateProfessionalCommandRequest(
            Id: Guid.NewGuid(),
            ProfessionalId: Guid.Empty,
            ProfessionalName: "JOAO",
-           Status: Enum.EAvailabilityStatus.Avaliable,
-           Services: new List<Service> { }
+           Status: Enum.EAvailabilityStatus.Avaliable
             );
 
     public UpdateProfessionalTests()
