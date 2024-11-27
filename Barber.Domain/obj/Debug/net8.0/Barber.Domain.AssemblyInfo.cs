@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Barber.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be7e8bf4670e90b8fc196b88fefa5a136cbff3c3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59209523d690907b4c64be7b2521fb36f263b373")]
 [assembly: System.Reflection.AssemblyProductAttribute("Barber.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Barber.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

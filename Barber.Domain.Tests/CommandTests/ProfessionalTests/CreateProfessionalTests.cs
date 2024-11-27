@@ -12,33 +12,27 @@ public class CreateProfessionalTests
     private readonly CreateProfessionalCommandRequest _InvalidCommand = new CreateProfessionalCommandRequest(
            ProfessionalId: Guid.NewGuid(),
            ProfessionalName: "",
-           Status: Enum.EAvailabilityStatus.Avaliable,
-           Services: new List<Service> { new Service(name: "", status: Enum.EAvailabilityStatus.Avaliable) }
+           Status: Enum.EAvailabilityStatus.Avaliable
             );
     private readonly CreateProfessionalCommandRequest _ValidCommand = new CreateProfessionalCommandRequest(
            ProfessionalId: Guid.NewGuid(),
            ProfessionalName: "Joao Vitor",
-           Status: Enum.EAvailabilityStatus.Avaliable,
-           Services: new List<Service>{
-                   new Service(  name: "sobrancelha", status: Enum.EAvailabilityStatus.Unavailable )}
+           Status: Enum.EAvailabilityStatus.Avaliable
             );
     private readonly CreateProfessionalCommandRequest _EmptyName = new CreateProfessionalCommandRequest(
            ProfessionalId: Guid.NewGuid(),
            ProfessionalName: string.Empty,
-           Status: Enum.EAvailabilityStatus.Avaliable,
-           Services: new List<Service> { }
+           Status: Enum.EAvailabilityStatus.Avaliable
             );
     private readonly CreateProfessionalCommandRequest _NameLessThanThreeCharacters = new CreateProfessionalCommandRequest(
            ProfessionalId: Guid.NewGuid(),
            ProfessionalName: "JO",
-           Status: Enum.EAvailabilityStatus.Avaliable,
-           Services: new List<Service> { }
+           Status: Enum.EAvailabilityStatus.Avaliable
             );
     private readonly CreateProfessionalCommandRequest _ProfessionalIdEmpty = new CreateProfessionalCommandRequest(
            ProfessionalId: Guid.Empty,
            ProfessionalName: "JOAO",
-           Status: Enum.EAvailabilityStatus.Avaliable,
-           Services: new List<Service> { }
+           Status: Enum.EAvailabilityStatus.Avaliable
             );
     public CreateProfessionalTests()
     {
