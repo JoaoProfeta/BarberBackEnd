@@ -34,23 +34,23 @@ public class CreateServiceTests
         _EmptyName.Validate();
         _NameLessThanThreeCharacters.Validate();
     }
-    //[TestMethod]
+    [TestMethod]
     public void Service_Create_Invalid()
     {
         Assert.AreEqual(_InvalidCommand.IsValid, false);
     }
-    //[TestMethod]
+    [TestMethod]
     public void Service_Create_Valid()
     {
         Assert.AreEqual(_ValidCommand.IsValid, true);
     }
-    //[TestMethod]
+    [TestMethod]
     public void Message_When_The_Name_Is_Empty()
     {
         Assert.AreEqual(_EmptyName.IsValid, false);
         Assert.AreEqual("O nome nao pode ser vazio", _EmptyName.Notifications.FirstOrDefault()?.Message);
     }
-    //[TestMethod]
+    [TestMethod]
     public void Message_When_Name_Contains_Less_than_3_characters()
     {
         Assert.AreEqual(_NameLessThanThreeCharacters.IsValid, false);

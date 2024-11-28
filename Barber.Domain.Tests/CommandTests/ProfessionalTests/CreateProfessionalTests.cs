@@ -52,19 +52,19 @@ public class CreateProfessionalTests
     {
         Assert.AreEqual(_ValidCommand.IsValid, true);
     }
-    //[TestMethod]
+    [TestMethod]
     public void Message_When_The_Name_Is_Empty()
     {
         Assert.AreEqual(_EmptyName.IsValid, false);
         Assert.AreEqual("O nome nao pode ser vazio", _EmptyName.Notifications.FirstOrDefault()?.Message);
     }
-    //[TestMethod]
+    [TestMethod]
     public void Message_When_Name_Contains_Less_than_3_characters()
     {
         Assert.AreEqual(_NameLessThanThreeCharacters.IsValid, false);
         Assert.AreEqual("Nome deve conter no minimo 3 caracteres", _NameLessThanThreeCharacters.Notifications.FirstOrDefault()?.Message);
     }
-    //[TestMethod]
+    [TestMethod]
     public void Message_When_The_Professional_Id_Is_Empty()
     {
         Assert.AreEqual(_ProfessionalIdEmpty.IsValid, false);
