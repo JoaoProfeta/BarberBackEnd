@@ -29,14 +29,14 @@ public class UpdateSchedulingHandleTests
             Id: Guid.NewGuid(),
             SchedulingTime: DateTime.Now,
             Status: Enum.ESchedulingStatus.Pending,
-            ProfessionalService: new List<SchedulingProfessionalServiceJoint>() { new SchedulingProfessionalServiceJoint(Guid.NewGuid(), Guid.Empty) }
+            ProfessionalService: new List<ProfessionalServiceJoint>() { new ProfessionalServiceJoint(Guid.Empty, Guid.Empty) }
 
             );
         _ValidCommand = new UpdateSchedulingCommandRequest(
             Id: create.Id,
             SchedulingTime: DateTime.Now,
             Status: Enum.ESchedulingStatus.Accepted,
-            ProfessionalService: new List<SchedulingProfessionalServiceJoint>() { new SchedulingProfessionalServiceJoint(Guid.NewGuid(), Guid.Empty) }
+            ProfessionalService: new List<ProfessionalServiceJoint>() { new ProfessionalServiceJoint(Guid.Empty, Guid.Empty) }
 
             );
     }
