@@ -34,7 +34,7 @@ public class UpdateProfessionalHandleTests
            ));
     }
 
-    //[TestMethod]
+    [TestMethod]
     public async Task Update_Professional_Handle_Test_Fail()
     {
 
@@ -43,7 +43,7 @@ public class UpdateProfessionalHandleTests
         Assert.AreEqual(_result.Success, false);
 
     }
-    //[TestMethod]
+    [TestMethod]
     public async Task Update_Professional_Handle_Test_Success()
     {
         var result = await _handler.Handle(_ValidCommand);

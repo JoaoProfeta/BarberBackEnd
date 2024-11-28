@@ -22,7 +22,6 @@ public class UpdateSchedulingHandleTests
         Scheduling create = new Scheduling(
                 schedulingTime: DateTime.Now,
                 status: Enum.ESchedulingStatus.Rejected
-
                 );
         _repository.CreateAsync(create).Wait();
         _InvalidCommand = new UpdateSchedulingCommandRequest(
@@ -30,24 +29,22 @@ public class UpdateSchedulingHandleTests
             SchedulingTime: DateTime.Now,
             Status: Enum.ESchedulingStatus.Pending,
             ProfessionalService: new List<ProfessionalServiceJoint>() { new ProfessionalServiceJoint(Guid.Empty, Guid.Empty) }
-
             );
         _ValidCommand = new UpdateSchedulingCommandRequest(
             Id: create.Id,
             SchedulingTime: DateTime.Now,
             Status: Enum.ESchedulingStatus.Accepted,
-            ProfessionalService: new List<ProfessionalServiceJoint>() { new ProfessionalServiceJoint(Guid.Empty, Guid.Empty) }
-
+            ProfessionalService: new List<ProfessionalServiceJoint>() { new ProfessionalServiceJoint(Guid.NewGuid(), Guid.NewGuid()) }
             );
     }
-    //[TestMethod]
+    [TestMethod]
     public async Task Update_Scheduling_Handle_Test_Fail()
     {
         var result = await _handle.Handle(_InvalidCommand);
         _result = (GenericCommandResult)result;
         Assert.AreEqual(_result.Success, false);
     }
-    //[TestMethod]
+    [TestMethod]
     public async Task Update_Scheduling_Handle_Test_Success()
     {
         var result = await _handle.Handle(_ValidCommand);

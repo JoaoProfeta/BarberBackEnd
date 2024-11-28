@@ -32,14 +32,14 @@ public class DeleteProfessionalHandleTests
 
     }
 
-    //[TestMethod]
+    [TestMethod]
     public async Task Delete_Professional_Handle_Fail()
     {
         var result = await _handler.Handle(_InvalidCommand);
         _result = (GenericCommandResult)result;
         Assert.AreEqual(_result.Success, false);
     }
-    //[TestMethod]
+    [TestMethod]
     public async Task Delete_Professional_Handle_Success()
     {
         var result = await _handler.Handle(_ValidCommand);

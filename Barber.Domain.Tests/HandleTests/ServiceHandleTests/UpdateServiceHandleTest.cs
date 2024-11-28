@@ -31,14 +31,14 @@ public class UpdateServiceHandleTest
         _repository.CreateAsync(service).Wait();
     }
 
-    //[TestMethod]
+    [TestMethod]
     public async Task Update_Service_Handle_Test_Fail()
     {
         var result = await _handle.Handle(_InvalidCommand);
         _result = (GenericCommandResult)result;
         Assert.AreEqual(_result.Success, false);
     }
-    // [TestMethod]
+    [TestMethod]
     public async Task Update_Service_Handle_Test_Success()
     {
         var result = await _handle.Handle(_ValidCommand);

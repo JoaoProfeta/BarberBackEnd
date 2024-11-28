@@ -22,14 +22,14 @@ public class CreateProfessionalHandleTests
     private readonly CreateProfessionalHandler _Handler = new CreateProfessionalHandler(new FakeProfessionalRepository());
     private GenericCommandResult _result = new GenericCommandResult();
 
-    //[TestMethod]
+    [TestMethod]
     public async Task Create_Professional_Handle_Test_Fail()
     {
         var result = await _Handler.Handle(_InvalidCommand);
         _result = (GenericCommandResult)result;
         Assert.AreEqual(_result.Success, false);
     }
-    //[TestMethod]
+    [TestMethod]
     public async Task Create_Professional_Handle_Test_Success()
     {
         var result = await _Handler.Handle(_ValidCommand);

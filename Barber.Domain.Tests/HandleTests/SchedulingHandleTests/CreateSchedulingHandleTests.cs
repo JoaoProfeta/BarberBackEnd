@@ -10,9 +10,9 @@ namespace Barber.Domain.Tests.HandleTests.SchedulingHandleTests;
 public class CreateSchedulingHandleTests
 {
     private readonly CreateSchedulingCommandRequest _InvalidCommand = new CreateSchedulingCommandRequest(
-        SchedulingTime: DateTime.Now,
+        SchedulingTime: DateTime.MinValue,
         SchedulingStatus: Enum.ESchedulingStatus.Pending,
-        ProfessionalService: new List<ProfessionalServiceJoint>() { new ProfessionalServiceJoint(Guid.NewGuid(), Guid.NewGuid()) }
+        ProfessionalService: new List<ProfessionalServiceJoint>() { new ProfessionalServiceJoint(Guid.Empty, Guid.Empty) }
         );
     private readonly CreateSchedulingCommandRequest _ValidCommand = new CreateSchedulingCommandRequest(
         SchedulingTime: DateTime.Now,
@@ -22,14 +22,14 @@ public class CreateSchedulingHandleTests
     private readonly CreateSchedulingHandler _Handler = new CreateSchedulingHandler(new FakeSchedulingRepository());
     private GenericCommandResult _result = new GenericCommandResult();
 
-    //[TestMethod]
+    [TestMethod]
     public async Task Create_Scheduling_Handle_Test_fail()
     {
         var result = await _Handler.Handle(_InvalidCommand);
         _result = (GenericCommandResult)result;
         Assert.AreEqual(_result.Success, false);
     }
-    //[TestMethod]
+    [TestMethod]
     public async Task Create_Scheduling_Handle_Test_success()
     {
         var result = await _Handler.Handle(_ValidCommand);
