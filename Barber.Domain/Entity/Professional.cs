@@ -22,17 +22,11 @@ public class Professional : Entity
     public void UpdateProfessonalName(string name) => ProfessionalName = name;
     public void UpdateStatus(EAvailabilityStatus status) => Status = status;
 
-    public void AddService(IEnumerable<Guid> serviceIds)
+    public void AddService(Guid serviceId)
     {
-        foreach (var service in serviceIds)
-        {
-            if (!Services.Any(s => s.ServiceId == service))
-            {
-                var create = new ProfessionalServiceJoint(service, this.Id);
-                if(!Services.Contains(create))
-                    Services.Add(create);
-            }
-        }
+        var create = new ProfessionalServiceJoint(serviceId, this.Id);
+        if (!Services.Contains(create))
+            Services.Add(create);
     }
-    
+
 }
